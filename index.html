@@ -11,11 +11,28 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Heebo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --cream: #F3EEE2;
+            --paper: #FFFFFF;
+            --ink: #2B2620;
+            --ink-soft: #6B6355;
+            --red: #B3261E;
+            --red-dark: #8C1D17;
+            --red-soft: #F3D9D6;
+            --vlan10: #2C6E9E;
+            --vlan10-soft: #DCE9F2;
+            --vlan20: #B9862F;
+            --vlan20-soft: #F3E7D2;
+            --line: #DCD4C0;
+            --radius: 14px;
+            --shadow: 0 2px 10px rgba(43,38,32,.06), 0 1px 2px rgba(43,38,32,.08);
+        }
+
         body {
-            font-family: 'Assistant', sans-serif;
+            font-family: 'Assistant', 'Heebo', sans-serif;
             background-color: #f1f5f9;
             color: #1e293b;
         }
@@ -32,17 +49,7 @@
             background: #0284c7;
             border-radius: 3px;
         }
-        @keyframes flow-up-down {
-            0% { left: 18%; top: 75%; opacity: 1; }
-            25% { left: 50%; top: 45%; }
-            50% { left: 50%; top: 12%; }
-            51% { background-color: #a855f7; }
-            75% { left: 50%; top: 45%; }
-            100% { left: 82%; top: 75%; opacity: 1; }
-        }
-        .packet-flow-animation {
-            animation: flow-up-down 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
+
         .tab-btn {
             transition: all 0.2s ease;
         }
@@ -52,18 +59,16 @@
             box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
         }
 
-        /* ----- אפקטים מעודכנים לאוואטר ----- */
+        /* ----- אפקטים לאוואטר ----- */
         @keyframes crazy-spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* הבהוב עיניים ממוקד כל 5 שניות */
         @keyframes eye-glow {
             0%, 100% { 
                 opacity: 1; 
                 transform: scale(1.2); 
-                /* פיזור מוקטן וממוקד מאד סביב העין */
                 box-shadow: 0 0 3px 1px #ff0000, 0 0 5px 2px #dc2626; 
             }
             50% { 
@@ -92,7 +97,6 @@
             animation: crazy-spin 3s linear infinite;
         }
 
-        /* תדירות של 5 שניות לכל סייקל הבהוב */
         .laser-eye {
             position: absolute;
             width: 4px;
@@ -102,6 +106,245 @@
             animation: eye-glow 5s infinite ease-in-out;
             z-index: 20;
         }
+
+        /* ===== עיצובי הסימולטור החדש ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 22px;
+            align-items: start;
+        }
+        @media (max-width: 980px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .sim-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+        .sim-card h2 {
+            font-size: 16px; margin: 0 0 14px; font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .sim-card h2 .num {
+            background: var(--red-soft); color: var(--red-dark);
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+            padding: 2px 8px; border-radius: 6px;
+        }
+
+        .topology-card { padding: 26px 26px 18px; }
+        .topo-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: radial-gradient(circle at 50% 8%, #FBF8F1 0%, var(--cream) 60%);
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .topo-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .link-label {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 700;
+            background: var(--paper);
+            padding: 2px 7px; border-radius: 6px;
+            border: 1px solid var(--line);
+            transform: translate(-50%,-50%);
+            white-space: nowrap;
+            color: var(--ink-soft);
+        }
+
+        .node {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .node .icon-box {
+            width: 64px; height: 52px;
+            background: var(--paper);
+            border: 2px solid var(--ink);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            transition: box-shadow .2s, border-color .2s, transform .15s;
+        }
+        .node:hover .icon-box { transform: translateY(-2px); }
+        .node .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700; font-size: 12px;
+        }
+        .node .sub { font-size: 10px; color: var(--ink-soft); font-family: 'JetBrains Mono', monospace; }
+
+        .node.pc .icon-box { border-color: var(--vlan10); color: var(--vlan10); }
+        .node.pc.vlan20 .icon-box { border-color: var(--vlan20); color: var(--vlan20); }
+        .node.pc .icon-box::after {
+            content: ''; position: absolute; bottom: -9px; width: 28px; height: 5px;
+            background: var(--ink); border-radius: 2px;
+        }
+        .node.pc .screen { width: 44px; height: 32px; border: 2px solid currentColor; border-radius: 3px; }
+
+        .node.switch .icon-box { gap: 3px; }
+        .node.switch .port { width: 5px; height: 16px; background: var(--ink); border-radius: 1px; }
+        .node.switch .ports-row { display: flex; gap: 3px; }
+
+        .node.router .icon-box { border-color: var(--red); border-radius: 50%; width: 70px; height: 70px; color: var(--red); }
+        .node.router svg { width: 34px; height: 34px; }
+
+        .node.selected .icon-box {
+            box-shadow: 0 0 0 4px rgba(179,38,30,.18);
+            border-color: var(--red) !important;
+        }
+        .node .tagpill {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
+            color: #fff; white-space: nowrap;
+        }
+        .node.pc .tagpill { background: var(--vlan10); }
+        .node.pc.vlan20 .tagpill { background: var(--vlan20); }
+
+        .packet-marker {
+            position: absolute;
+            width: 34px; height: 24px;
+            background: var(--red);
+            border-radius: 5px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 14px;
+            transform: translate(-50%,-50%);
+            transition: top .65s cubic-bezier(.65,0,.35,1), left .65s cubic-bezier(.65,0,.35,1), opacity .3s;
+            box-shadow: 0 3px 10px rgba(179,38,30,.4);
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .packet-marker.show { opacity: 1; }
+
+        .legend {
+            display: flex; gap: 18px; flex-wrap: wrap;
+            margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+            font-size: 12px; color: var(--ink-soft);
+        }
+        .legend .item { display: flex; align-items: center; gap: 6px; }
+        .legend .swatch { width: 16px; height: 4px; border-radius: 2px; }
+
+        .side-panel { display: flex; flex-direction: column; gap: 18px; }
+        .select-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+        .select-row label { font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+        .side-panel select {
+            width: 100%; padding: 10px 12px;
+            border: 1.5px solid var(--line); border-radius: 10px;
+            background: var(--paper);
+            font-family: 'Heebo', sans-serif; font-size: 14px; font-weight: 500;
+            color: var(--ink);
+        }
+        .arrow-sep { text-align: center; color: var(--red); font-weight: 900; font-size: 16px; }
+
+        .info-mini {
+            display: flex; justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--ink-soft); padding: 4px 0;
+        }
+
+        .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+        .sim-btn {
+            font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 13px;
+            border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer;
+            transition: transform .1s, opacity .2s;
+        }
+        .sim-btn:active { transform: scale(.96); }
+        .sim-btn:disabled { opacity: .4; cursor: not-allowed; }
+        .btn-primary { background: var(--red); color: #fff; flex: 1; }
+        .btn-primary:hover:not(:disabled) { background: var(--red-dark); }
+        .btn-ghost { background: var(--cream); color: var(--ink); border: 1.5px solid var(--line); }
+        .btn-ghost:hover:not(:disabled) { border-color: var(--red); }
+
+        .step-note {
+            margin-top: 14px; padding: 12px 14px;
+            background: var(--cream); border-radius: 10px;
+            font-size: 13px; min-height: 44px;
+            border-right: 4px solid var(--red);
+        }
+        .step-progress {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--ink-soft); margin-top: 8px;
+        }
+
+        .envelope-card .frame-outer {
+            border: 2px solid var(--ink);
+            border-radius: 10px;
+            padding: 12px;
+            background: #FBF8F1;
+            transition: all .3s;
+        }
+        .frame-title {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+            color: var(--ink-soft); margin-bottom: 8px; letter-spacing: .5px;
+        }
+        .frame-field {
+            display: flex; justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+            padding: 5px 0;
+        }
+        .frame-field .k { color: var(--ink-soft); }
+        .frame-field .v { font-weight: 700; }
+
+        .vlan-tag-block {
+            margin: 10px 0;
+            padding: 9px 12px;
+            background: var(--red);
+            color: #fff;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            max-height: 0; opacity: 0; overflow: hidden;
+            transition: all .35s ease;
+            padding-top: 0; padding-bottom: 0;
+        }
+        .vlan-tag-block.active {
+            max-height: 60px; opacity: 1;
+            padding: 9px 12px;
+        }
+
+        .ip-inner {
+            margin-top: 10px;
+            border: 2px dashed var(--ink-soft);
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: var(--paper);
+        }
+
+        .cli-card { margin-top: 22px; }
+        .terminal {
+            background: #211E19;
+            border-radius: 10px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #EDE7D8;
+            height: 260px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+        }
+        .terminal .ln { white-space: pre-wrap; line-height: 1.55; }
+        .terminal .prompt-line { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+        .terminal .prompt-text { color: #7FCB8A; white-space: nowrap; }
+        .terminal input {
+            background: transparent; border: none; outline: none;
+            color: #EDE7D8; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            flex: 1;
+        }
+        .cli-hint {
+            font-size: 12px; color: var(--ink-soft); margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr; text-align: left;
+        }
+        .cli-hint code { background: var(--cream); padding: 1px 5px; border-radius: 4px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between overflow-x-hidden bg-slate-100 relative pb-20">
@@ -110,7 +353,7 @@
     <header class="bg-white border-b border-slate-200 sticky top-0 z-40 px-4 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <!-- Crazy Avatar Integrated into Header -->
+                <!-- Crazy Avatar -->
                 <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 crazy-avatar-container shadow-md flex-shrink-0 bg-slate-100 flex items-center justify-center">
                     <img src="https://lh3.googleusercontent.com/d/1oIkZlLHZWtFgoDblyxziTALQZwsyxAOo" alt="אוואטר מטורלל" class="w-full h-full object-cover crazy-avatar-img">
                     <div class="laser-eye" style="top: 40%; right: 38%;"></div>
@@ -172,8 +415,6 @@
 
     <!-- MAIN BODY CONTENT -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
-        
-        <!-- MAIN DISPLAY AREA -->
         <section class="w-full flex flex-col gap-6">
 
             <!-- STEP 1: THE CRISIS -->
@@ -189,7 +430,6 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         <div class="lg:col-span-8 space-y-4">
-                            <!-- Action box -->
                             <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-5 text-right">
                                 <h3 class="text-sky-800 font-extrabold text-sm mb-2 flex items-center gap-1.5">
                                     <i data-lucide="zap" class="w-4 h-4 text-sky-600"></i>
@@ -224,7 +464,6 @@
                             </div>
                         </div>
 
-                        <!-- Side Specs Box -->
                         <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between text-xs font-semibold text-slate-600 space-y-3">
                             <div class="space-y-2 border-b border-slate-200 pb-3">
                                 <div class="flex justify-between">
@@ -252,7 +491,6 @@
                         </div>
                     </div>
 
-                    <!-- Question Box -->
                     <div class="mt-6 bg-amber-50 border border-amber-300 rounded-xl p-4">
                         <h4 class="text-amber-800 font-extrabold text-xs mb-2 flex items-center gap-1.5">
                             <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
@@ -332,132 +570,160 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 </div>
             </div>
 
-            <!-- STEP 3: SIMULATOR -->
+            <!-- STEP 3: NEW SIMULATOR REPLACEMENT -->
             <div id="step-3" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <span class="bg-sky-100 text-sky-700 border border-sky-200 text-xs px-3 py-1 rounded-full font-extrabold uppercase">תחנת עבודה מעשית</span>
-                    <h2 class="text-2xl font-black text-slate-800 mt-3">סימולטור: ניתוב בין VLAN-ים על גבי קו יחיד</h2>
-                    <p class="text-slate-500 text-xs font-semibold mt-1">
-                        הגדר את ערכי העיטוף (VLAN ID) וכתובות ה-IP של תתי-הממשקים בנתב, כדי לאפשר לחבילת המידע לנסוע מ-VLAN 10 ל-VLAN 20!
-                    </p>
+                    
+                    <div class="main-grid">
+                        <!-- ===== Topology ===== -->
+                        <div class="sim-card topology-card">
+                            <h2><span class="num">01</span> טופולוגיית הרשת</h2>
+                            <div class="topo-stage" id="stage">
+                                <svg class="topo-svg" viewBox="0 0 100 100" preserveAspectRatio="none" id="svgLines"></svg>
 
-                    <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-                        <!-- Interactive Inputs -->
-                        <div class="lg:col-span-5 space-y-4">
-                            <!-- Subinterface 10 -->
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                                <h3 class="text-xs font-bold text-pink-600 flex items-center gap-1.5 border-b border-slate-200 pb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-                                    <span>ממשק לוגי: GigabitEthernet 0/0.10</span>
-                                </h3>
-                                <div class="grid grid-cols-2 gap-2 text-xs">
-                                    <div>
-                                        <label class="block text-slate-500 font-bold mb-1">שיוך VLAN</label>
-                                        <select id="sim-encap-10" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-800 font-mono font-bold focus:outline-none focus:border-sky-500">
-                                            <option value="none">-- בחר VLAN --</option>
-                                            <option value="10">VLAN 10 (HR)</option>
-                                            <option value="20">VLAN 20 (R&D)</option>
-                                        </select>
+                                <div class="node router" id="node-router" style="left:50%;top:14%;">
+                                    <div class="icon-box">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 15h16M4 15l-2 5h20l-2-5M8 15V9a4 4 0 0 1 8 0v6" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                     </div>
-                                    <div>
-                                        <label class="block text-slate-500 font-bold mb-1">כתובת IP (Gateway)</label>
-                                        <select id="sim-ip-10" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-800 font-mono font-bold focus:outline-none focus:border-sky-500">
-                                            <option value="none">-- בחר IP --</option>
-                                            <option value="192.168.10.1">192.168.10.1</option>
-                                            <option value="192.168.20.1">192.168.20.1</option>
-                                        </select>
-                                    </div>
+                                    <div class="label">R1</div>
+                                    <div class="sub">Gi0/0.10 · Gi0/0.20</div>
                                 </div>
+
+                                <div class="node switch" id="node-switch" style="left:50%;top:48%;">
+                                    <div class="icon-box">
+                                        <div class="ports-row">
+                                            <div class="port"></div><div class="port"></div><div class="port"></div><div class="port"></div><div class="port"></div>
+                                        </div>
+                                    </div>
+                                    <div class="label">SW1</div>
+                                    <div class="sub">Layer 2</div>
+                                </div>
+
+                                <div class="node pc" id="node-pc1" data-key="pc1" style="left:12%;top:85%;">
+                                    <div class="tagpill">VLAN 10</div>
+                                    <div class="icon-box"><div class="screen"></div></div>
+                                    <div class="label">PC1</div>
+                                    <div class="sub">192.168.10.10</div>
+                                </div>
+                                <div class="node pc" id="node-pc2" data-key="pc2" style="left:34%;top:85%;">
+                                    <div class="tagpill">VLAN 10</div>
+                                    <div class="icon-box"><div class="screen"></div></div>
+                                    <div class="label">PC2</div>
+                                    <div class="sub">192.168.10.11</div>
+                                </div>
+                                <div class="node pc vlan20" id="node-pc3" data-key="pc3" style="left:66%;top:85%;">
+                                    <div class="tagpill">VLAN 20</div>
+                                    <div class="icon-box"><div class="screen"></div></div>
+                                    <div class="label">PC3</div>
+                                    <div class="sub">192.168.20.10</div>
+                                </div>
+                                <div class="node pc vlan20" id="node-pc4" data-key="pc4" style="left:88%;top:85%;">
+                                    <div class="tagpill">VLAN 20</div>
+                                    <div class="icon-box"><div class="screen"></div></div>
+                                    <div class="label">PC4</div>
+                                    <div class="sub">192.168.20.11</div>
+                                </div>
+
+                                <div class="link-label" style="left:50%;top:31%;">Trunk 802.1Q</div>
+
+                                <div class="packet-marker" id="packetMarker">✉</div>
                             </div>
 
-                            <!-- Subinterface 20 -->
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                                <h3 class="text-xs font-bold text-sky-600 flex items-center gap-1.5 border-b border-slate-200 pb-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                                    <span>ממשק לוגי: GigabitEthernet 0/0.20</span>
-                                </h3>
-                                <div class="grid grid-cols-2 gap-2 text-xs">
-                                    <div>
-                                        <label class="block text-slate-500 font-bold mb-1">שיוך VLAN</label>
-                                        <select id="sim-encap-20" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-800 font-mono font-bold focus:outline-none focus:border-sky-500">
-                                            <option value="none">-- בחר VLAN --</option>
-                                            <option value="10">VLAN 10 (HR)</option>
-                                            <option value="20">VLAN 20 (R&D)</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-slate-500 font-bold mb-1">כתובת IP (Gateway)</label>
-                                        <select id="sim-ip-20" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-800 font-mono font-bold focus:outline-none focus:border-sky-500">
-                                            <option value="none">-- בחר IP --</option>
-                                            <option value="192.168.10.1">192.168.10.1</option>
-                                            <option value="192.168.20.1">192.168.20.1</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="legend">
+                                <div class="item"><span class="swatch" style="background:var(--vlan10);"></span> VLAN 10 — Access</div>
+                                <div class="item"><span class="swatch" style="background:var(--vlan20);"></span> VLAN 20 — Access</div>
+                                <div class="item"><span class="swatch" style="background:var(--red);"></span> Trunk (802.1Q)</div>
+                                <div class="item">✉ = החבילה הנשלחת</div>
                             </div>
                         </div>
 
-                        <!-- Topology Visualization -->
-                        <div class="lg:col-span-7 bg-slate-50 rounded-xl border border-slate-200 p-5 flex flex-col justify-between overflow-hidden relative">
-                            <div class="text-center">
-                                <span class="text-[10px] text-slate-400 font-mono font-bold">ROUTER-ON-A-STICK TOPOLOGY</span>
-                                
-                                <div class="relative w-full h-56 mt-3 bg-white rounded-xl border border-slate-200 flex flex-col items-center justify-between p-4 overflow-hidden shadow-inner">
-                                    
-                                    <!-- Router -->
-                                    <div class="text-center z-10">
-                                        <div class="w-12 h-12 rounded-full bg-sky-50 border-2 border-sky-500 flex items-center justify-center mx-auto shadow-sm">
-                                            <i data-lucide="router" class="w-6 h-6 text-sky-600"></i>
-                                        </div>
-                                        <span class="text-[10px] font-bold block mt-1 text-slate-800">Router (R1)</span>
-                                        <span class="text-[8px] code-font text-slate-400">Port G0/0 (Trunk)</span>
-                                    </div>
-
-                                    <!-- Physical Cable -->
-                                    <div class="absolute h-16 w-0.5 bg-slate-300 left-1/2 top-[26%] z-0"></div>
-
-                                    <!-- Switch -->
-                                    <div class="text-center z-10 my-1">
-                                        <div class="w-10 h-10 bg-slate-100 border-2 border-slate-400 rounded-md flex items-center justify-center mx-auto shadow-sm">
-                                            <i data-lucide="git-commit" class="w-5 h-5 text-slate-600"></i>
-                                        </div>
-                                        <span class="text-[9px] font-bold block text-slate-700">Switch (S1)</span>
-                                    </div>
-
-                                    <!-- End Devices -->
-                                    <div class="w-full flex justify-between px-6 z-10">
-                                        <div class="text-center">
-                                            <i data-lucide="monitor" class="w-7 h-7 text-pink-500 mx-auto"></i>
-                                            <span class="text-[9px] font-bold block mt-1 text-slate-800">PC A (HR)</span>
-                                            <span class="text-[8px] code-font text-slate-400">VLAN 10</span>
-                                        </div>
-                                        <div class="text-center">
-                                            <i data-lucide="monitor" class="w-7 h-7 text-sky-500 mx-auto"></i>
-                                            <span class="text-[9px] font-bold block mt-1 text-slate-800">PC B (R&D)</span>
-                                            <span class="text-[8px] code-font text-slate-400">VLAN 20</span>
-                                        </div>
-                                    </div>
-
-                                    <div id="packet-dot" class="absolute w-3.5 h-3.5 bg-pink-500 rounded-full shadow-md hidden z-20"></div>
+                        <!-- ===== Side panel ===== -->
+                        <div class="side-panel">
+                            <div class="sim-card">
+                                <h2><span class="num">02</span> בחירת מקור ויעד</h2>
+                                <div class="select-row">
+                                    <label>מקור (Source)</label>
+                                    <select id="srcSelect">
+                                        <option value="pc1">PC1 — VLAN 10 — 192.168.10.10</option>
+                                        <option value="pc2">PC2 — VLAN 10 — 192.168.10.11</option>
+                                        <option value="pc3">PC3 — VLAN 20 — 192.168.20.10</option>
+                                        <option value="pc4">PC4 — VLAN 20 — 192.168.20.11</option>
+                                    </select>
                                 </div>
+                                <div class="arrow-sep">↓</div>
+                                <div class="select-row">
+                                    <label>יעד (Destination)</label>
+                                    <select id="dstSelect">
+                                        <option value="pc3">PC3 — VLAN 20 — 192.168.20.10</option>
+                                        <option value="pc1">PC1 — VLAN 10 — 192.168.10.10</option>
+                                        <option value="pc2">PC2 — VLAN 10 — 192.168.10.11</option>
+                                        <option value="pc4">PC4 — VLAN 20 — 192.168.20.11</option>
+                                    </select>
+                                </div>
+                                <div class="info-mini"><span>מסלול צפוי:</span><span id="routeInfo">חוצה VLANים — עובר דרך R1</span></div>
+
+                                <div class="btn-row">
+                                    <button class="sim-btn btn-primary" id="sendBtn">שלח חבילה ▶</button>
+                                    <button class="sim-btn btn-ghost" id="resetBtn">איפוס ↺</button>
+                                </div>
+                                <div class="btn-row">
+                                    <button class="sim-btn btn-ghost" id="prevBtn" disabled>◀ שלב קודם</button>
+                                    <button class="sim-btn btn-ghost" id="nextBtn" disabled>שלב הבא ▶</button>
+                                </div>
+
+                                <div class="step-note" id="stepNote">בחרו מקור ויעד ולחצו "שלח חבילה" כדי להתחיל.</div>
+                                <div class="step-progress" id="stepProgress"></div>
                             </div>
 
-                            <button onclick="triggerRoasTest()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-extrabold py-2.5 rounded-lg text-xs transition-all flex items-center justify-center gap-2 mt-4 shadow">
-                                <i data-lucide="play" class="w-4 h-4"></i>
-                                <span>הפעל בדיקת ניתוב (PC A ➔ PC B)</span>
-                            </button>
+                            <div class="sim-card envelope-card">
+                                <h2><span class="num">03</span> מעטפת החבילה</h2>
+                                <div class="frame-outer">
+                                    <div class="frame-title">ETHERNET FRAME</div>
+                                    <div class="frame-field"><span class="k">כתובת מקור (Src MAC)</span><span class="v" id="fSrcMac">—</span></div>
+                                    <div class="frame-field"><span class="k">כתובת יעד (Dst MAC)</span><span class="v" id="fDstMac">—</span></div>
+
+                                    <div class="vlan-tag-block" id="vlanTagBlock">
+                                        <span>🏷 תג 802.1Q</span>
+                                        <span id="vlanTagVal">VLAN —</span>
+                                    </div>
+
+                                    <div class="ip-inner">
+                                        <div class="frame-title">IP PACKET</div>
+                                        <div class="frame-field"><span class="k">כתובת מקור (Src IP)</span><span class="v" id="fSrcIp">—</span></div>
+                                        <div class="frame-field"><span class="k">כתובת יעד (Dst IP)</span><span class="v" id="fDstIp">—</span></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="sim-feedback" class="mt-4 hidden p-4 rounded-xl text-xs font-bold"></div>
+                    <!-- ===== CLI ===== -->
+                    <div class="sim-card cli-card">
+                        <h2><span class="num">04</span> תרגול שורת פקודות (Cisco IOS — R1)</h2>
+                        <div class="terminal" id="terminal">
+                            <div class="ln">R1 con0 is now available</div>
+                            <div class="ln">Press RETURN to get started.</div>
+                            <div class="prompt-line">
+                                <span class="prompt-text" id="promptText">Router&gt;</span>
+                                <input type="text" id="cliInput" autocomplete="off" spellcheck="false">
+                            </div>
+                        </div>
+                        <div class="cli-hint">
+                            נסו: <code>enable</code> → <code>configure terminal</code> → <code>interface gi0/0.10</code> → <code>encapsulation dot1Q 10</code> → <code>ip address 192.168.10.1 255.255.255.0</code> → <code>no shutdown</code> → <code>end</code> → <code>show ip interface brief</code>
+                        </div>
+                    </div>
+
                 </div>
 
+                <!-- Navigation buttons -->
                 <div class="flex justify-between">
                     <button onclick="switchStep(2)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 transition-all">
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         <span>חזרה להסבר</span>
                     </button>
-                    <button id="btn-to-step-4" onclick="switchStep(4)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md disabled:opacity-40 disabled:pointer-events-none" disabled>
+                    <button id="btn-to-step-4" onclick="switchStep(4)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md">
                         <span>המשך לאתגר ה-AI</span>
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
@@ -482,7 +748,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
-                        <!-- Junior Admin Avatar Card -->
                         <div class="md:col-span-4 bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4 text-center">
                             <div class="w-16 h-16 bg-red-100 border-2 border-red-400 rounded-full flex items-center justify-center mx-auto text-2xl animate-bounce">
                                 🙇‍♂️
@@ -498,7 +763,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
                         </div>
 
-                        <!-- Chat Box -->
                         <div class="md:col-span-8 bg-slate-50 border border-slate-200 rounded-xl flex flex-col h-[380px] overflow-hidden">
                             <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-3 flex flex-col">
                                 <div class="bg-white p-3 rounded-xl border border-slate-200 max-w-[85%] self-start text-xs text-slate-700 shadow-sm font-semibold">
@@ -597,7 +861,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
     <!-- FLOATING DAN-GPT BOT CARD -->
     <aside id="bot-widget" class="fixed bottom-6 left-6 z-50 w-72 md:w-80 shadow-2xl rounded-2xl overflow-hidden bg-white border border-slate-300 transition-all duration-300">
-        <!-- Card Header -->
         <div class="bg-slate-900 text-white px-3.5 py-2.5 flex justify-between items-center border-b border-slate-800 cursor-pointer" onclick="toggleBot()">
             <span class="text-[10px] font-mono font-bold tracking-wider text-emerald-400 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -606,7 +869,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             <button class="text-slate-400 hover:text-white text-xs font-bold px-1" id="bot-toggle-btn">✕</button>
         </div>
 
-        <!-- Avatar Body -->
         <div id="bot-content" class="p-4 flex flex-col items-center text-center">
             <div class="relative w-16 h-16 rounded-full overflow-hidden border-2 border-sky-500 mb-2.5 shadow-md bg-slate-100">
                 <img src="https://lh3.googleusercontent.com/d/1oIkZlLHZWtFgoDblyxziTALQZwsyxAOo" alt="DAN-GPT" class="w-full h-full object-cover">
@@ -620,7 +882,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 אני דן GPT, עוזר השיעור והפרויקט שלכם. אפשר להיעזר בי ב:
             </p>
 
-            <!-- Badges -->
             <div class="flex flex-wrap justify-center gap-1 my-3 max-h-24 overflow-y-auto">
                 <span class="bg-slate-100 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded border border-slate-200">DNS</span>
                 <span class="bg-slate-100 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded border border-slate-200">DHCP</span>
@@ -633,7 +894,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 <span class="bg-slate-100 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded border border-slate-200">Wi-Fi 6</span>
             </div>
 
-            <!-- Connect Button -->
             <a href="https://gemini.google.com/gem/167016ac4a4b/66c3b83daa7940ef?usp=sharing" target="_blank" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-mono font-bold py-2 px-3 rounded-lg text-[11px] transition-all flex items-center justify-center gap-2 shadow">
                 <span>connect --gem dan-gpt $</span>
             </a>
@@ -663,7 +923,6 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
         let xp = 0;
         let activeStep = 1;
         let currentLevel = "טכנאי רשתות מתקדם";
-        let hasPassedSim = false;
         let hasPassedAi = false;
 
         const xpCounter = document.getElementById('xp-counter');
@@ -675,6 +934,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
         window.onload = function() {
             lucide.createIcons();
             loadSavedProgress();
+            drawLinks();
         };
 
         function toggleBot() {
@@ -732,18 +992,17 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             for (let i = 1; i <= 5; i++) {
                 document.getElementById(`step-${i}`).classList.add('hidden');
                 const btn = document.getElementById(`btn-step-${i}`);
-                if (btn) {
-                    btn.classList.remove('active');
-                }
+                if (btn) btn.classList.remove('active');
             }
 
             document.getElementById(`step-${stepNum}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`btn-step-${stepNum}`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
+            if (activeBtn) activeBtn.classList.add('active');
 
             activeStep = stepNum;
+            if (stepNum === 3) {
+                setTimeout(drawLinks, 50);
+            }
             saveProgress();
         }
 
@@ -797,73 +1056,287 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             }
         }
 
-        function triggerRoasTest() {
-            const encap10 = document.getElementById('sim-encap-10').value;
-            const ip10 = document.getElementById('sim-ip-10').value;
-            const encap20 = document.getElementById('sim-encap-20').value;
-            const ip20 = document.getElementById('sim-ip-20').value;
+        /* ================= SIMULATOR LOGIC ================= */
+        const pcs = {
+            pc1:{name:'PC1', vlan:10, ip:'192.168.10.10', mac:'PC1-MAC', x:12, y:85},
+            pc2:{name:'PC2', vlan:10, ip:'192.168.10.11', mac:'PC2-MAC', x:34, y:85},
+            pc3:{name:'PC3', vlan:20, ip:'192.168.20.10', mac:'PC3-MAC', x:66, y:85},
+            pc4:{name:'PC4', vlan:20, ip:'192.168.20.11', mac:'PC4-MAC', x:88, y:85},
+        };
+        const gw = {
+            10:{mac:'R-Gi0/0.10-MAC', ip:'192.168.10.1'},
+            20:{mac:'R-Gi0/0.20-MAC', ip:'192.168.20.1'},
+        };
+        const switchPos = {x:50, y:48};
+        const routerPos = {x:50, y:14};
 
-            const feedback = document.getElementById('sim-feedback');
-            feedback.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-emerald-50', 'text-emerald-800');
+        const svg = document.getElementById('svgLines');
+        function line(x1,y1,x2,y2,color,dash){
+            const el = document.createElementNS('http://www.w3.org/2000/svg','line');
+            el.setAttribute('x1',x1); el.setAttribute('y1',y1);
+            el.setAttribute('x2',x2); el.setAttribute('y2',y2);
+            el.setAttribute('stroke',color);
+            el.setAttribute('stroke-width', dash ? 1.2 : 1);
+            if(dash) el.setAttribute('stroke-dasharray','3,2');
+            el.setAttribute('vector-effect','non-scaling-stroke');
+            svg.appendChild(el);
+        }
+        function drawLinks(){
+            if(!svg) return;
+            svg.innerHTML='';
+            line(routerPos.x, routerPos.y, switchPos.x, switchPos.y, '#B3261E', true);
+            Object.values(pcs).forEach(pc=>{
+                line(switchPos.x, switchPos.y, pc.x, pc.y, pc.vlan===10 ? '#2C6E9E' : '#B9862F', false);
+            });
+        }
 
-            const isSub10Ok = (encap10 === '10' && ip10 === '192.168.10.1');
-            const isSub20Ok = (encap20 === '20' && ip20 === '192.168.20.1');
+        const srcSelect = document.getElementById('srcSelect');
+        const dstSelect = document.getElementById('dstSelect');
+        const sendBtn = document.getElementById('sendBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const stepNote = document.getElementById('stepNote');
+        const stepProgress = document.getElementById('stepProgress');
+        const routeInfo = document.getElementById('routeInfo');
+        const marker = document.getElementById('packetMarker');
 
-            if (isSub10Ok && isSub20Ok) {
-                const dot = document.getElementById('packet-dot');
-                dot.className = "absolute w-3.5 h-3.5 bg-pink-500 rounded-full";
-                dot.classList.remove('hidden');
-                dot.classList.add('packet-flow-animation');
+        let steps = [];
+        let stepIdx = -1;
 
-                setTimeout(() => {
-                    feedback.className += ' bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    feedback.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl">🌟</span>
-                            <div>
-                                <p class="font-bold">הגשר הלוגי הוקם בהצלחה! (Successful Inter-VLAN Routing)</p>
-                                <p class="text-[11px] opacity-90">ההגדרות הלוגיות שלך בנתב תקינות לחלוטין. תתי-הממשקים מפרידים את התקשורת ומאפשרים לנתב לנתב חבילות בין ה-VLAN-ים בצורה מאובטחת!</p>
-                            </div>
-                        </div>
-                    `;
-                    
-                    dot.classList.add('hidden');
-                    dot.classList.remove('packet-flow-animation');
+        function highlightSelection(){
+            document.querySelectorAll('.node.pc').forEach(n=>n.classList.remove('selected'));
+            const s = document.getElementById('node-'+srcSelect.value);
+            const d = document.getElementById('node-'+dstSelect.value);
+            if(s) s.classList.add('selected');
+            if(d) d.classList.add('selected');
+        }
 
-                    if (!hasPassedSim) {
-                        addXP(50);
-                        hasPassedSim = true;
-                    }
-                    document.getElementById('btn-to-step-4').disabled = false;
+        function buildSteps(srcKey, dstKey){
+            const s = pcs[srcKey], d = pcs[dstKey];
+            const sameVlan = s.vlan === d.vlan;
 
-                }, 2500);
+            if(sameVlan){
+                const frame = {srcMac:s.mac, dstMac:d.mac, srcIp:s.ip, dstIp:d.ip, tag:null};
+                return [
+                    {pos:{x:s.x,y:s.y}, frame, note:`${s.name} בונה מסגרת Ethernet: היעד באותו VLAN (${s.vlan}), אז נשלחת ישירות ל-MAC של ${d.name} — ללא צורך בראוטר.`},
+                    {pos:switchPos, frame, note:`המתג מקבל את המסגרת ביציאת Access של VLAN ${s.vlan}, מזהה את MAC היעד בטבלת ה-MAC שלו ומעביר הלאה — ללא תיוג VLAN (יציאת Access לא מתייגת).`},
+                    {pos:{x:d.x,y:d.y}, frame, note:`המסגרת מגיעה ל-${d.name}. תקשורת תוך-VLAN הושלמה מבלי לגעת בראוטר בכלל.`},
+                ];
+            }
 
+            const gwSrc = gw[s.vlan], gwDst = gw[d.vlan];
+            const frame1 = {srcMac:s.mac, dstMac:gwSrc.mac, srcIp:s.ip, dstIp:d.ip, tag:null};
+            const frame1tag = {...frame1, tag:s.vlan};
+            const frame2tag = {srcMac:gwDst.mac, dstMac:d.mac, srcIp:s.ip, dstIp:d.ip, tag:d.vlan};
+            const frame2 = {...frame2tag, tag:null};
+
+            return [
+                {pos:{x:s.x,y:s.y}, frame:frame1, note:`${s.name} רואה שהיעד ${d.name} בתת-רשת אחרת (VLAN ${d.vlan}). המסגרת נשלחת ל-MAC של שער ברירת המחדל (${gwSrc.mac}), אך כתובת ה-IP של היעד נשארת ${d.ip}.`},
+                {pos:switchPos, frame:frame1tag, note:`המתג מקבל את המסגרת ביציאת Access של VLAN ${s.vlan}, ומכיוון שהיא צריכה לצאת דרך יציאת ה-Trunk לראוטר — מוסיף תג 802.1Q עם המספר ${s.vlan}.`},
+                {pos:routerPos, frame:frame2tag, note:`הראוטר מקבל את המסגרת בתת-ממשק Gi0/0.${s.vlan}, מסיר את התג, ומנתב לפי כתובת ה-IP. הוא בונה מסגרת חדשה עם תג VLAN ${d.vlan} ו-MAC יעד של ${d.name} — זהו ניתוב בין-VLAN אמיתי.`},
+                {pos:switchPos, frame:frame2tag, note:`המסגרת המנותבת חוזרת דרך ה-Trunk אל המתג, עדיין מתויגת ב-VLAN ${d.vlan}.`},
+                {pos:{x:d.x,y:d.y}, frame:frame2, note:`המתג מסיר את התג לפני שהוא מעביר ליציאת ה-Access של ${d.name}. המסגרת מגיעה ליעד — כתובת ה-IP המקורית והסופית לא השתנתה לאורך כל המסע.`},
+            ];
+        }
+
+        function updateRouteInfo(){
+            const s = pcs[srcSelect.value], d = pcs[dstSelect.value];
+            routeInfo.textContent = s.vlan === d.vlan
+                ? `אותו VLAN (${s.vlan}) — מעבר דרך המתג בלבד`
+                : `חוצה VLANים (${s.vlan} → ${d.vlan}) — עובר דרך R1`;
+        }
+
+        srcSelect.addEventListener('change', ()=>{ updateRouteInfo(); highlightSelection(); resetAnim(); });
+        dstSelect.addEventListener('change', ()=>{ updateRouteInfo(); highlightSelection(); resetAnim(); });
+
+        function setFrame(frame){
+            document.getElementById('fSrcMac').textContent = frame.srcMac;
+            document.getElementById('fDstMac').textContent = frame.dstMac;
+            document.getElementById('fSrcIp').textContent = frame.srcIp;
+            document.getElementById('fDstIp').textContent = frame.dstIp;
+            const tagBlock = document.getElementById('vlanTagBlock');
+            if(frame.tag){
+                tagBlock.classList.add('active');
+                document.getElementById('vlanTagVal').textContent = 'VLAN ' + frame.tag;
             } else {
-                feedback.className += ' bg-red-50 text-red-700 border border-red-200';
-                let errors = [];
-                if (encap10 !== '10') errors.push("תת-הממשק G0/0.10 חייב להיות משויך ל-encapsulation dot1Q 10 (HR).");
-                if (ip10 !== '192.168.10.1') errors.push("כתובת ה-IP של G0/0.10 חייבת להיות 192.168.10.1.");
-                if (encap20 !== '20') errors.push("תת-הממשק G0/0.20 חייב להיות משויך ל-encapsulation dot1Q 20 (R&D).");
-                if (ip20 !== '192.168.20.1') errors.push("כתובת ה-IP של G0/0.20 חייבת להיות 192.168.20.1.");
-
-                feedback.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span>❌</span>
-                        <div>
-                            <p class="font-bold">נכשלה בדיקת הניתוב! הפרדות לוגיות שגויות זוהו בראוטר.</p>
-                            <ul class="list-disc pr-4 text-[11px] opacity-90 space-y-1 mt-1">
-                                ${errors.map(err => `<li>${err}</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>
-                `;
+                tagBlock.classList.remove('active');
             }
         }
 
-        function handleChatKey(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
+        function renderStep(){
+            if(stepIdx < 0 || stepIdx >= steps.length) return;
+            const step = steps[stepIdx];
+            marker.style.left = step.pos.x + '%';
+            marker.style.top = step.pos.y + '%';
+            marker.classList.add('show');
+            setFrame(step.frame);
+            stepNote.textContent = step.note;
+            stepProgress.textContent = `שלב ${stepIdx+1} מתוך ${steps.length}`;
+            prevBtn.disabled = stepIdx === 0;
+            nextBtn.disabled = stepIdx === steps.length - 1;
+        }
+
+        function resetAnim(){
+            stepIdx = -1;
+            steps = [];
+            marker.classList.remove('show');
+            stepNote.textContent = 'בחרו מקור ויעד ולחצו "שלח חבילה" כדי להתחיל.';
+            stepProgress.textContent = '';
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            setFrame({srcMac:'—', dstMac:'—', srcIp:'—', dstIp:'—', tag:null});
+        }
+
+        sendBtn.addEventListener('click', ()=>{
+            if(srcSelect.value === dstSelect.value){
+                stepNote.textContent = 'בחרו מחשב יעד שונה ממחשב המקור.';
+                return;
             }
+            steps = buildSteps(srcSelect.value, dstSelect.value);
+            stepIdx = 0;
+            renderStep();
+            addXP(10);
+        });
+        prevBtn.addEventListener('click', ()=>{ if(stepIdx>0){ stepIdx--; renderStep(); } });
+        nextBtn.addEventListener('click', ()=>{ if(stepIdx<steps.length-1){ stepIdx++; renderStep(); } });
+        resetBtn.addEventListener('click', resetAnim);
+
+        document.querySelectorAll('.node.pc').forEach(n=>{
+            n.addEventListener('click', ()=>{
+                srcSelect.value = n.dataset.key;
+                updateRouteInfo(); highlightSelection(); resetAnim();
+            });
+        });
+
+        /* ================= CLI SIMULATOR ================= */
+        const terminal = document.getElementById('terminal');
+        const promptText = document.getElementById('promptText');
+        const cliInput = document.getElementById('cliInput');
+
+        let mode = 'user';
+        let currentIf = null;
+        const ifState = {
+            'gi0/0.10':{encap:null, ip:null, mask:null, up:false},
+            'gi0/0.20':{encap:null, ip:null, mask:null, up:false},
+        };
+
+        function prompt(){
+            if(mode==='user') return 'Router>';
+            if(mode==='priv') return 'Router#';
+            if(mode==='config') return 'Router(config)#';
+            if(mode==='subif') return `Router(config-subif)#`;
+            return 'Router>';
+        }
+        function printLine(text){
+            const div = document.createElement('div');
+            div.className='ln';
+            div.textContent = text;
+            terminal.insertBefore(div, terminal.querySelector('.prompt-line'));
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+        function refreshPrompt(){
+            promptText.textContent = prompt();
+        }
+
+        function normalizeIfName(raw){
+            return raw.toLowerCase().replace(/gigabitethernet/,'gi').replace(/fastethernet/,'fa');
+        }
+
+        function handleCommand(cmdRaw){
+            const cmd = cmdRaw.trim();
+            printLine(prompt()+' '+cmdRaw);
+            if(cmd==='') return;
+            const low = cmd.toLowerCase();
+
+            if(low==='enable' || low==='en'){
+                if(mode==='user'){ mode='priv'; }
+                else printLine('% Already in privileged mode');
+                return;
+            }
+            if(low==='configure terminal' || low==='conf t'){
+                if(mode==='priv'){ mode='config'; printLine('Enter configuration commands, one per line. End with CNTL/Z.'); }
+                else printLine('% Invalid input — enter privileged mode first (enable)');
+                return;
+            }
+            if(low.startsWith('interface ')){
+                if(mode!=='config'){ printLine('% Invalid input — go to global config mode first'); return; }
+                const ifname = normalizeIfName(low.replace('interface ','').trim());
+                if(!ifState[ifname]){ printLine('% Invalid interface. Try gi0/0.10 or gi0/0.20'); return; }
+                currentIf = ifname; mode='subif';
+                return;
+            }
+            if(low.startsWith('encapsulation dot1q')){
+                if(mode!=='subif'){ printLine('% Invalid input — enter interface config mode first'); return; }
+                const vlan = low.match(/\d+/g);
+                const vlanNum = vlan ? vlan[vlan.length-1] : null;
+                if(!vlanNum){ printLine('% Specify a VLAN number, e.g. encapsulation dot1Q 10'); return; }
+                ifState[currentIf].encap = vlanNum;
+                printLine(`Interface ${currentIf} tagged with VLAN ${vlanNum}`);
+                return;
+            }
+            if(low.startsWith('ip address')){
+                if(mode!=='subif'){ printLine('% Invalid input — enter interface config mode first'); return; }
+                const parts = cmd.split(/\s+/);
+                if(parts.length<4){ printLine('% Incomplete command. Usage: ip address <ip> <mask>'); return; }
+                ifState[currentIf].ip = parts[2];
+                ifState[currentIf].mask = parts[3];
+                return;
+            }
+            if(low==='no shutdown' || low==='no shut'){
+                if(mode!=='subif'){ printLine('% Invalid input — enter interface config mode first'); return; }
+                ifState[currentIf].up = true;
+                printLine(`%LINK-3-UPDOWN: Interface ${currentIf}, changed state to up`);
+                return;
+            }
+            if(low==='exit'){
+                if(mode==='subif') mode='config';
+                else if(mode==='config') mode='priv';
+                else if(mode==='priv') mode='user';
+                return;
+            }
+            if(low==='end'){
+                mode='priv';
+                return;
+            }
+            if(low==='show ip interface brief' || low==='show ip int br'){
+                printLine('Interface IP-Address OK? Status Protocol');
+                Object.keys(ifState).forEach(k=>{
+                    const st = ifState[k];
+                    const ip = st.ip || 'unassigned';
+                    const status = st.up ? 'up' : 'administratively down';
+                    const proto = st.up ? 'up' : 'down';
+                    printLine(`${k.padEnd(23)}${ip.padEnd(17)}YES manual ${status.padEnd(22)}${proto}`);
+                });
+                return;
+            }
+            if(low==='show vlan brief'){
+                printLine('VLAN Name Status Ports');
+                printLine('10 VLAN0010 active');
+                printLine('20 VLAN0020 active');
+                return;
+            }
+            if(low==='?' || low==='help'){
+                printLine('Commands: enable, configure terminal, interface gi0/0.10|gi0/0.20,');
+                printLine('encapsulation dot1Q <n>, ip address <ip> <mask>, no shutdown, exit, end,');
+                printLine('show ip interface brief, show vlan brief');
+                return;
+            }
+            printLine('% Unknown command or invalid syntax');
+        }
+
+        cliInput.addEventListener('keydown', (e)=>{
+            if(e.key==='Enter'){
+                const val = cliInput.value;
+                cliInput.value='';
+                handleCommand(val);
+                refreshPrompt();
+            }
+        });
+
+        /* ================= STEP 4: AI CHAT LOGIC ================= */
+        function handleChatKey(event) {
+            if (event.key === 'Enter') sendChatMessage();
         }
 
         function sendChatMessage() {
@@ -940,6 +1413,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             }, 1800);
         }
 
+        /* ================= STEP 5: REPORT & EXPORT ================= */
         function copyShareCode() {
             const code = document.getElementById('share-code').innerText;
             const tempInput = document.createElement("input");
@@ -976,7 +1450,7 @@ XP סופי: ${xp} XP
 
             const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
-            const link = document.getElementById('download-link') || document.createElement('a');
+            const link = document.createElement('a');
             link.href = url;
             link.download = `Lesson7_Report.txt`;
             document.body.appendChild(link);
