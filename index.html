@@ -107,7 +107,7 @@
             z-index: 20;
         }
 
-        /* ===== עיצובי הסימולטור החדש ===== */
+        /* ===== עיצובי הסימולטור ===== */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 380px;
@@ -417,144 +417,227 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
         <section class="w-full flex flex-col gap-6">
 
-            <!-- STEP 1: THE CRISIS -->
+            <!-- STEP 1: THE CRISIS (UPDATED WITH LARGER FONTS) -->
             <div id="step-1" class="step-container space-y-6">
                 <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
-                        <h2 class="text-2xl font-black text-slate-800 flex items-center gap-2">
+                        <h2 class="text-3xl font-black text-slate-800 flex items-center gap-3">
                             <span>מחשב קצה (Host / PC / Server)</span>
-                            <span class="text-xl">💻</span>
+                            <span class="text-3xl">💻</span>
                         </h2>
-                        <span class="bg-red-100 text-red-600 text-xs font-extrabold px-3 py-1 rounded-full border border-red-200">אתגר הארכיטקטורה</span>
+                        <span class="bg-red-100 text-red-600 text-sm font-extrabold px-4 py-1.5 rounded-full border border-red-200">אתגר הארכיטקטורה</span>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                        <div class="lg:col-span-8 space-y-4">
-                            <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-5 text-right">
-                                <h3 class="text-sky-800 font-extrabold text-sm mb-2 flex items-center gap-1.5">
-                                    <i data-lucide="zap" class="w-4 h-4 text-sky-600"></i>
+                        <div class="lg:col-span-8 space-y-5">
+                            <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-6 text-right">
+                                <h3 class="text-sky-800 font-extrabold text-xl mb-3 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-6 h-6 text-sky-600"></i>
                                     <span>פרדוקס החומה והגשר</span>
                                 </h3>
-                                <p class="text-xs text-slate-700 leading-relaxed font-semibold">
+                                <p class="text-base text-slate-700 leading-relaxed font-semibold">
                                     בשיעור 4 בנינו חומות אבטחה מעולות: חילקנו את המתג (Switch) ל-**VLAN 10 (HR)** ו-**VLAN 20 (R&D)**. אף מחלקה לא יכולה להציץ או להאזין לשנייה ברמת שכבה 2.
                                     <br><br>
-                                    אבל כעת המנכ"ל מוציא הנחיה חדשה: <span class="text-sky-700 font-extrabold">מחלקת משאבי אנוש חייבת לקבל גישה לשרת הפיתוח החדש שנמצא בתוך VLAN 20!</span> אנחנו לא רוצים לבטל את ה-VLAN-ים ולחזור לרשת פתוחה ופרוצה. איך מאפשרים לשתי רשתות מבודדות לדבר זו עם זו בצורה מבוקרת ומאובטחת?
+                                    אבל כעת המנכ"ל מוציא הנחיה חדשה: <span class="text-sky-700 font-black">מחלקת משאבי אנוש חייבת לקבל גישה לשרת הפיתוח החדש שנמצא בתוך VLAN 20!</span> אנחנו לא רוצים לבטל את ה-VLAN-ים ולחזור לרשת פתוחה ופרוצה. איך מאפשרים לשתי רשתות מבודדות לדבר זו עם זו בצורה מבוקרת ומאובטחת?
                                 </p>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
-                                    <h4 class="text-red-600 font-extrabold text-xs mb-1.5 flex items-center gap-1.5">
-                                        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl">
+                                    <h4 class="text-red-600 font-extrabold text-base mb-2 flex items-center gap-2">
+                                        <i data-lucide="shield-alert" class="w-5 h-5"></i>
                                         למה אי אפשר לעשות את זה במתג?
                                     </h4>
-                                    <p class="text-[11px] text-slate-600 leading-relaxed">
+                                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
                                         מתג רגיל (Layer 2 Switch) עיוור לכתובות IP. הוא עובד רק עם תגיות VLAN וכתובות MAC. הוא מתוכנת לחסום מעבר פריים בין VLAN 10 ל-VLAN 20 ללא יוצא מן הכלל.
                                     </p>
                                 </div>
-                                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
-                                    <h4 class="text-emerald-600 font-extrabold text-xs mb-1.5 flex items-center gap-1.5">
-                                        <i data-lucide="router" class="w-4 h-4"></i>
+                                <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl">
+                                    <h4 class="text-emerald-600 font-extrabold text-base mb-2 flex items-center gap-2">
+                                        <i data-lucide="router" class="w-5 h-5"></i>
                                         הנתב כשומר הסף (שכבה 3)
                                     </h4>
-                                    <p class="text-[11px] text-slate-600 leading-relaxed">
+                                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
                                         הנתב (Router) מבין כתובות IP וניתוב. הוא יכול לשמש כ"שער אגרה" המחבר בין שתי המדינות השונות. חבילה שרוצה לעבור תעלה לראוטר, תעבור בדיקה ביטחונית ותוזרם ליעדה!
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between text-xs font-semibold text-slate-600 space-y-3">
-                            <div class="space-y-2 border-b border-slate-200 pb-3">
-                                <div class="flex justify-between">
+                        <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between text-sm font-semibold text-slate-600 space-y-4">
+                            <div class="space-y-3 border-b border-slate-200 pb-4">
+                                <div class="flex justify-between items-center">
                                     <span>שכבת OSI:</span>
-                                    <span class="font-bold text-slate-800">Layers 7 - 1 (All)</span>
+                                    <span class="font-bold text-slate-800 text-base">Layers 7 - 1 (All)</span>
                                 </div>
-                                <div class="flex justify-between">
+                                <div class="flex justify-between items-center">
                                     <span>יחידת מידע (PDU):</span>
-                                    <span class="font-bold text-slate-800">Data / Segment</span>
+                                    <span class="font-bold text-slate-800 text-base">Data / Segment</span>
                                 </div>
-                                <div class="flex justify-between">
+                                <div class="flex justify-between items-center">
                                     <span>תפקיד עיקרי:</span>
-                                    <span class="font-bold text-slate-800">End-Host (מקור/יעד)</span>
+                                    <span class="font-bold text-slate-800 text-base">End-Host (מקור/יעד)</span>
                                 </div>
-                                <div class="flex justify-between">
+                                <div class="flex justify-between items-center">
                                     <span>מזהה רשת:</span>
-                                    <span class="font-bold text-slate-800">IP & Hostname</span>
+                                    <span class="font-bold text-slate-800 text-base">IP & Hostname</span>
                                 </div>
                             </div>
 
-                            <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                <span class="text-[10px] font-bold text-slate-400 block mb-1">פרוטוקולי יישום</span>
-                                <span class="font-extrabold text-slate-700">HTTP, HTTPS, FTP, DNS</span>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="text-xs font-bold text-slate-400 block mb-1">פרוטוקולי יישום</span>
+                                <span class="font-extrabold text-slate-800 text-base">HTTP, HTTPS, FTP, DNS</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-6 bg-amber-50 border border-amber-300 rounded-xl p-4">
-                        <h4 class="text-amber-800 font-extrabold text-xs mb-2 flex items-center gap-1.5">
-                            <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
+                    <div class="mt-8 bg-amber-50 border border-amber-300 rounded-xl p-6">
+                        <h4 class="text-amber-800 font-extrabold text-lg mb-3 flex items-center gap-2">
+                            <i data-lucide="flame" class="w-6 h-6 text-amber-600"></i>
                             <span>שאלה אסטרטגית של האחווואנים</span>
                         </h4>
-                        <p class="text-xs text-amber-900 font-semibold mb-3">אם יש לנו 50 VLAN-ים שונים ברשת, האם נצטרך למתוח 50 כבלים פיזיים נפרדים מהמתג אל הנתב?</p>
-                        <div class="flex flex-col gap-2">
-                            <button onclick="answerScenario(1)" class="bg-white hover:bg-amber-100/50 text-right border border-amber-200 text-slate-800 text-xs px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm">כן, חייב כבל פיזי בודד עבור כל VLAN נפרד כדי למנוע ערבוב אותות.</button>
-                            <button onclick="answerScenario(2)" class="bg-white hover:bg-amber-100/50 text-right border border-amber-200 text-slate-800 text-xs px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm">ממש לא! נשתמש בכבל פיזי יחיד המוגדר כ-Trunk, ונפצל את פורט הנתב לוגית לתתי-ממשקים (Subinterfaces) – פתרון המכונה Router on a Stick!</button>
+                        <p class="text-sm text-amber-900 font-bold mb-4">אם יש לנו 50 VLAN-ים שונים ברשת, האם נצטרך למתוח 50 כבלים פיזיים נפרדים מהמתג אל הנתב?</p>
+                        <div class="flex flex-col gap-3">
+                            <button onclick="answerScenario(1)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-sm px-5 py-3 rounded-lg font-bold transition-all shadow-sm">כן, חייב כבל פיזי בודד עבור כל VLAN נפרד כדי למנוע ערבוב אותות.</button>
+                            <button onclick="answerScenario(2)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-sm px-5 py-3 rounded-lg font-bold transition-all shadow-sm">ממש לא! נשתמש בכבל פיזי יחיד המוגדר כ-Trunk, ונפצל את פורט הנתב לוגית לתתי-ממשקים (Subinterfaces) – פתרון המכונה Router on a Stick!</button>
                         </div>
-                        <div id="scenario-feedback" class="mt-3 hidden p-3 rounded-lg text-xs font-bold"></div>
+                        <div id="scenario-feedback" class="mt-4 hidden p-4 rounded-lg text-sm font-bold"></div>
                     </div>
                 </div>
                 
                 <div class="flex justify-end">
-                    <button onclick="switchStep(2)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md">
+                    <button onclick="switchStep(2)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-base px-8 py-4 rounded-xl flex items-center gap-3 transition-all shadow-md">
                         <span>גלה את פלא ה-Router on a Stick</span>
-                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 2: THEORY -->
+            <!-- STEP 2: THEORY (UPDATED WITH MOVED SECTION AND NEW DIAGRAM COLUMN) -->
             <div id="step-2" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <span class="text-sky-600 text-xs font-extrabold uppercase tracking-wider">תיאוריה חיונית</span>
-                    <h2 class="text-2xl font-black text-slate-800 mt-1 mb-4">Router on a Stick: כבל פיזי אחד, רשתות מרובות</h2>
+                    <h2 class="text-3xl font-black text-slate-800 mt-1 mb-4">Router on a Stick: כבל פיזי אחד, רשתות מרובות</h2>
                     
-                    <p class="text-slate-600 leading-relaxed text-sm mb-6 font-semibold">
+                    <p class="text-slate-700 leading-relaxed text-base mb-6 font-semibold">
                         במקום לבזבז פורטים פיזיים יקרים על הנתב, אנחנו משתמשים בשיטת **Router on a Stick (RoaS)**. 
                         אנחנו לוקחים כבל פיזי בודד, מחברים אותו לפורט מהיר בנתב (למשל GigabitEthernet 0/0), ומגדירים את הצד של המתג כ-**Trunk** (שיודע להעביר את כל תגיות ה-VLAN על כבל אחד).
                     </p>
 
-                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 max-w-3xl mx-auto space-y-4">
-                        <div class="text-center text-xs text-slate-500 font-extrabold uppercase">איך פורט פיזי בודד מתפצל לוגית?</div>
+                    <!-- TWO COLUMN LAYOUT: RIGHT = CARDS, LEFT = SCHEMATIC DIAGRAM -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-6">
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-right">
-                                <span class="text-sky-600 font-black code-font text-lg block mb-1">1. הפיצול</span>
-                                <h4 class="text-slate-800 font-bold text-xs">Subinterfaces</h4>
-                                <p class="text-[11px] text-slate-500 mt-1">מפצלים את הממשק `G0/0` בעזרת נקודה: `G0/0.10` עבור VLAN 10, ו-`G0/0.20` עבור VLAN 20.</p>
-                            </div>
-                            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-right">
-                                <span class="text-sky-600 font-black code-font text-lg block mb-1">2. התגיות</span>
-                                <h4 class="text-slate-800 font-bold text-xs">Encapsulation dot1Q</h4>
-                                <p class="text-[11px] text-slate-500 mt-1">אנחנו מורים לכל תת-ממשק לאיזה מספר VLAN הוא משוייך: `encapsulation dot1Q 10` ו-`encapsulation dot1Q 20`.</p>
-                            </div>
-                            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-right">
-                                <span class="text-sky-600 font-black code-font text-lg block mb-1">3. השער</span>
-                                <h4 class="text-slate-800 font-bold text-xs">Default Gateway</h4>
-                                <p class="text-[11px] text-slate-500 mt-1">כל תת-ממשק כזה מקבל את הכתובת המשמשת כשער ברירת המחדל (Gateway) של אותו ה-VLAN שלו.</p>
+                        <!-- RIGHT SIDE: THE 3 CARDS (ENLARGED FONTS & MOVED RIGHT) -->
+                        <div class="lg:col-span-7 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-5">
+                            <div class="text-right text-base text-slate-800 font-black">איך פורט פיזי בודד מתפצל לוגית?</div>
+                            
+                            <div class="space-y-4">
+                                <!-- Card 1 -->
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
+                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">1. הפיצול (Subinterfaces)</span>
+                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
+                                        מפצלים את הממשק הפיזי <code class="bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded border border-sky-200">Gi0/0</code> בעזרת נקודה:
+                                        <br>
+                                        <code class="text-sky-800 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">Gi0/0.10</code> עבור VLAN 10, ו-
+                                        <code class="text-sky-800 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">Gi0/0.20</code> עבור VLAN 20.
+                                    </p>
+                                </div>
+                                
+                                <!-- Card 2 -->
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
+                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">2. התגיות (Encapsulation dot1Q)</span>
+                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
+                                        מורים לכל תת-ממשק לוגי לאיזה מספר VLAN הוא משוייך. הנתב קורא ומסיר את התג בכניסה, ומוסיף תג ביציאה:
+                                        <br>
+                                        <code class="text-red-700 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">encapsulation dot1Q 10</code>
+                                    </p>
+                                </div>
+                                
+                                <!-- Card 3 -->
+                                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
+                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">3. השער (Default Gateway)</span>
+                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
+                                        כל תת-ממשק מקבל כתובת IP משלו המתפקדת כ-Default Gateway של רשת ה-VLAN הספציפית שלו:
+                                        <br>
+                                        <code class="text-emerald-700 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">ip address 192.168.10.1 255.255.255.0</code>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-slate-200">
-                            <span class="text-[11px] text-slate-500 block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות (Cisco IOS CLI):</span>
-                            <pre class="bg-slate-900 text-sky-300 p-3 rounded-lg font-mono text-[11px] space-y-1 text-left overflow-x-auto shadow-inner" dir="ltr">
+                        <!-- LEFT SIDE: SCHEMATIC VISUALIZATION OF ROUTER ON A STICK -->
+                        <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between items-center relative overflow-hidden">
+                            <div class="w-full text-center border-b border-slate-700 pb-3">
+                                <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">סכמת RoaS ויזואלית</span>
+                                <h3 class="font-extrabold text-base text-slate-100 mt-2">Router on a Stick</h3>
+                            </div>
+
+                            <!-- Visual Diagram Container -->
+                            <div class="my-6 w-full flex flex-col items-center gap-2 relative">
+                                
+                                <!-- Router Node -->
+                                <div class="w-24 h-24 rounded-full bg-slate-800 border-4 border-red-500 flex flex-col items-center justify-center shadow-lg shadow-red-500/20 z-10 relative">
+                                    <i data-lucide="router" class="w-10 h-10 text-red-400"></i>
+                                    <span class="font-mono text-xs font-extrabold text-white mt-0.5">Router (R1)</span>
+                                </div>
+
+                                <!-- The Stick (Single Cable) with Subinterfaces Overlay -->
+                                <div class="relative w-full flex justify-center py-2">
+                                    <div class="w-3 bg-gradient-to-b from-red-500 via-amber-400 to-sky-500 h-28 rounded-full shadow-md animate-pulse"></div>
+                                    
+                                    <!-- Badges on Stick -->
+                                    <div class="absolute right-[12%] top-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-[11px] font-mono text-sky-300 shadow">
+                                        <span>Gi0/0.10</span> ➔ <span class="text-sky-400 font-bold">VLAN 10</span>
+                                    </div>
+                                    <div class="absolute left-[12%] bottom-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-[11px] font-mono text-amber-300 shadow">
+                                        <span>Gi0/0.20</span> ➔ <span class="text-amber-400 font-bold">VLAN 20</span>
+                                    </div>
+                                    <div class="absolute bg-red-600 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full shadow top-1/2 -translate-y-1/2">
+                                        Trunk 802.1Q (כבל יחיד)
+                                    </div>
+                                </div>
+
+                                <!-- Switch Node -->
+                                <div class="w-48 bg-slate-800 border-2 border-slate-600 rounded-xl p-3 flex flex-col items-center shadow-lg z-10">
+                                    <div class="flex gap-2 mb-1">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                    </div>
+                                    <span class="font-mono text-xs font-bold text-slate-200">Switch (Layer 2)</span>
+                                </div>
+
+                                <!-- Split to VLANs -->
+                                <div class="grid grid-cols-2 gap-4 w-full mt-3 text-center">
+                                    <div class="bg-sky-950/60 border border-sky-500/40 p-2.5 rounded-lg">
+                                        <span class="text-xs font-extrabold text-sky-400 block">VLAN 10 (HR)</span>
+                                        <span class="text-[10px] font-mono text-slate-400">192.168.10.0/24</span>
+                                    </div>
+                                    <div class="bg-amber-950/60 border border-amber-500/40 p-2.5 rounded-lg">
+                                        <span class="text-xs font-extrabold text-amber-400 block">VLAN 20 (R&D)</span>
+                                        <span class="text-[10px] font-mono text-slate-400">192.168.20.0/24</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <p class="text-xs text-slate-400 text-center font-medium leading-relaxed bg-slate-800/50 p-2.5 rounded-lg border border-slate-700 w-full">
+                                💡 **המקל (Stick):** הכבל הפיזי היחיד שמעביר את כל המידע המתוייג אל הנתב וממנו חזרה למתג.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- CISCO CLI CODE EXAMPLE -->
+                    <div class="pt-4 border-t border-slate-200">
+                        <span class="text-xs text-slate-600 block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות (Cisco IOS CLI):</span>
+                        <pre class="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-xs space-y-1 text-left overflow-x-auto shadow-inner" dir="ltr">
 Router(config)# interface GigabitEthernet 0/0.10
 Router(config-subif)# encapsulation dot1Q 10
 Router(config-subif)# ip address 192.168.10.1 255.255.255.0
 Router(config-subif)# interface GigabitEthernet 0/0.20
 Router(config-subif)# encapsulation dot1Q 20
 Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
-                        </div>
                     </div>
                 </div>
                 
@@ -570,7 +653,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 </div>
             </div>
 
-            <!-- STEP 3: NEW SIMULATOR REPLACEMENT -->
+            <!-- STEP 3: SIMULATOR -->
             <div id="step-3" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     
@@ -807,7 +890,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 </div>
             </div>
 
-            <!-- STEP 5: REPORT -->
+            <!-- STEP 5: REPORT (UPDATED WITH PART 2 LINK BUTTON) -->
             <div id="step-5" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <span class="text-sky-600 text-xs font-extrabold uppercase tracking-wider">משוב עמיתים וסגירת דוח</span>
@@ -853,6 +936,15 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
                         </div>
                     </div>
+
+                    <!-- NEW BUTTON FOR PART 2 LINK ADDED HERE BELOW FELLOW FEEDBACK -->
+                    <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col items-center justify-center">
+                        <a href="https://saharhakimi-lab.github.io/routerost1/" target="_blank" class="w-full md:w-auto bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-base px-8 py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                            <span>לחץ לחלק שני של הנושא</span>
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+
                 </div>
             </div>
 
