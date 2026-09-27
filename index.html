@@ -38,6 +38,8 @@
         }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            display: inline-block;
         }
         ::-webkit-scrollbar {
             width: 6px;
@@ -126,12 +128,12 @@
             padding: 22px;
         }
         .sim-card h2 {
-            font-size: 16px; margin: 0 0 14px; font-weight: 700;
+            font-size: 18px; margin: 0 0 14px; font-weight: 700;
             display: flex; align-items: center; gap: 8px;
         }
         .sim-card h2 .num {
             background: var(--red-soft); color: var(--red-dark);
-            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+            font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
             padding: 2px 8px; border-radius: 6px;
         }
 
@@ -149,13 +151,14 @@
         .link-label {
             position: absolute;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; font-weight: 700;
+            font-size: 12px; font-weight: 700;
             background: var(--paper);
-            padding: 2px 7px; border-radius: 6px;
+            padding: 2px 8px; border-radius: 6px;
             border: 1px solid var(--line);
             transform: translate(-50%,-50%);
             white-space: nowrap;
             color: var(--ink-soft);
+            direction: ltr;
         }
 
         .node {
@@ -177,9 +180,10 @@
         .node:hover .icon-box { transform: translateY(-2px); }
         .node .label {
             font-family: 'JetBrains Mono', monospace;
-            font-weight: 700; font-size: 12px;
+            font-weight: 700; font-size: 13px;
+            direction: ltr;
         }
-        .node .sub { font-size: 10px; color: var(--ink-soft); font-family: 'JetBrains Mono', monospace; }
+        .node .sub { font-size: 11px; color: var(--ink-soft); font-family: 'JetBrains Mono', monospace; direction: ltr; }
 
         .node.pc .icon-box { border-color: var(--vlan10); color: var(--vlan10); }
         .node.pc.vlan20 .icon-box { border-color: var(--vlan20); color: var(--vlan20); }
@@ -202,8 +206,8 @@
         }
         .node .tagpill {
             position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
-            color: #fff; white-space: nowrap;
+            font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
+            color: #fff; white-space: nowrap; direction: ltr;
         }
         .node.pc .tagpill { background: var(--vlan10); }
         .node.pc.vlan20 .tagpill { background: var(--vlan20); }
@@ -227,32 +231,32 @@
         .legend {
             display: flex; gap: 18px; flex-wrap: wrap;
             margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
-            font-size: 12px; color: var(--ink-soft);
+            font-size: 13px; color: var(--ink-soft); font-weight: 600;
         }
         .legend .item { display: flex; align-items: center; gap: 6px; }
         .legend .swatch { width: 16px; height: 4px; border-radius: 2px; }
 
         .side-panel { display: flex; flex-direction: column; gap: 18px; }
         .select-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-        .select-row label { font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+        .select-row label { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
         .side-panel select {
             width: 100%; padding: 10px 12px;
             border: 1.5px solid var(--line); border-radius: 10px;
             background: var(--paper);
-            font-family: 'Heebo', sans-serif; font-size: 14px; font-weight: 500;
-            color: var(--ink);
+            font-family: 'Heebo', sans-serif; font-size: 14px; font-weight: 600;
+            color: var(--ink); direction: ltr; text-align: left;
         }
-        .arrow-sep { text-align: center; color: var(--red); font-weight: 900; font-size: 16px; }
+        .arrow-sep { text-align: center; color: var(--red); font-weight: 900; font-size: 18px; }
 
         .info-mini {
             display: flex; justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace; font-size: 11px;
-            color: var(--ink-soft); padding: 4px 0;
+            font-family: 'Assistant', sans-serif; font-size: 13px; font-weight: 700;
+            color: var(--ink-soft); padding: 6px 0;
         }
 
         .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
         .sim-btn {
-            font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 13px;
+            font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 14px;
             border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer;
             transition: transform .1s, opacity .2s;
         }
@@ -266,12 +270,13 @@
         .step-note {
             margin-top: 14px; padding: 12px 14px;
             background: var(--cream); border-radius: 10px;
-            font-size: 13px; min-height: 44px;
+            font-size: 14px; min-height: 44px; font-weight: 600;
             border-right: 4px solid var(--red);
+            line-height: 1.5;
         }
         .step-progress {
-            font-family: 'JetBrains Mono', monospace; font-size: 11px;
-            color: var(--ink-soft); margin-top: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--ink-soft); margin-top: 8px; direction: ltr; text-align: right;
         }
 
         .envelope-card .frame-outer {
@@ -282,13 +287,13 @@
             transition: all .3s;
         }
         .frame-title {
-            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
-            color: var(--ink-soft); margin-bottom: 8px; letter-spacing: .5px;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+            color: var(--ink-soft); margin-bottom: 8px; letter-spacing: .5px; direction: ltr; text-align: left;
         }
         .frame-field {
             display: flex; justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
-            padding: 5px 0;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            padding: 5px 0; direction: ltr;
         }
         .frame-field .k { color: var(--ink-soft); }
         .frame-field .v { font-weight: 700; }
@@ -299,11 +304,12 @@
             background: var(--red);
             color: #fff;
             border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 13px;
             display: flex; justify-content: space-between; align-items: center;
             max-height: 0; opacity: 0; overflow: hidden;
             transition: all .35s ease;
             padding-top: 0; padding-bottom: 0;
+            direction: ltr;
         }
         .vlan-tag-block.active {
             max-height: 60px; opacity: 1;
@@ -324,7 +330,7 @@
             border-radius: 10px;
             padding: 16px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
+            font-size: 14px;
             color: #EDE7D8;
             height: 260px;
             overflow-y: auto;
@@ -336,15 +342,33 @@
         .terminal .prompt-text { color: #7FCB8A; white-space: nowrap; }
         .terminal input {
             background: transparent; border: none; outline: none;
-            color: #EDE7D8; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            color: #EDE7D8; font-family: 'JetBrains Mono', monospace; font-size: 14px;
             flex: 1;
         }
         .cli-hint {
-            font-size: 12px; color: var(--ink-soft); margin-top: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            direction: ltr; text-align: left;
+            font-size: 13px; color: var(--ink-soft); margin-top: 10px;
+            font-family: 'Assistant', sans-serif; font-weight: 600;
         }
-        .cli-hint code { background: var(--cream); padding: 1px 5px; border-radius: 4px; }
+        .cli-hint code { 
+            background: var(--cream); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-family: 'JetBrains Mono', monospace; 
+            direction: ltr; 
+            display: inline-block;
+            border: 1px solid var(--line);
+        }
+        
+        .eng-box {
+            direction: ltr;
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between overflow-x-hidden bg-slate-100 relative pb-20">
@@ -362,9 +386,9 @@
                 <div>
                     <h1 class="font-extrabold text-lg text-slate-800 tracking-tight flex items-center gap-2">
                         <span>אקדמיית שותפי הרשת של סהר</span>
-                        <span class="text-xs bg-sky-100 text-sky-700 font-bold px-2 py-0.5 rounded-full border border-sky-200">CLASS_07</span>
+                        <span class="text-xs bg-sky-100 text-sky-700 font-bold px-2 py-0.5 rounded-full border border-sky-200 code-font">CLASS_07</span>
                     </h1>
-                    <p class="text-xs text-slate-500 font-semibold">ניתוב בין VLAN-ים: איך מחברים איים מבודדים?</p>
+                    <p class="text-xs text-slate-500 font-semibold">ניתוב בין <span class="eng-box text-xs">VLAN</span>-ים: איך מחברים איים מבודדים?</p>
                 </div>
             </div>
             
@@ -387,26 +411,26 @@
         </div>
     </header>
 
-    <!-- NAVIGATION TABS -->
+    <!-- NAVIGATION TABS - FONT ENLARGED -->
     <div class="bg-white border-b border-slate-200 px-4 py-2 sticky top-[73px] z-30">
         <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <button id="btn-step-1" onclick="switchStep(1)" class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
+            <button id="btn-step-1" onclick="switchStep(1)" class="tab-btn active flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
                 <i data-lucide="help-circle" class="w-4 h-4"></i>
                 <span>01. פרדוקס החומה והגשר</span>
             </button>
-            <button id="btn-step-2" onclick="switchStep(2)" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
+            <button id="btn-step-2" onclick="switchStep(2)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
                 <i data-lucide="book-open" class="w-4 h-4"></i>
-                <span>02. סוד תתי-הממשקים (RoaS)</span>
+                <span>02. סוד תתי הממשקים <span class="eng-box text-xs">RoaS</span></span>
             </button>
-            <button id="btn-step-3" onclick="switchStep(3)" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
+            <button id="btn-step-3" onclick="switchStep(3)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
                 <i data-lucide="cpu" class="w-4 h-4"></i>
                 <span>03. סימולטור הגשר הלוגי</span>
             </button>
-            <button id="btn-step-4" onclick="switchStep(4)" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
+            <button id="btn-step-4" onclick="switchStep(4)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
                 <i data-lucide="terminal" class="w-4 h-4"></i>
-                <span>04. אתגר איתור התקלות (AI)</span>
+                <span>04. אתגר איתור התקלות <span class="eng-box text-xs">AI</span></span>
             </button>
-            <button id="btn-step-5" onclick="switchStep(5)" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
+            <button id="btn-step-5" onclick="switchStep(5)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 whitespace-nowrap">
                 <i data-lucide="award" class="w-4 h-4"></i>
                 <span>05. דוח ביצועים וסיכום</span>
             </button>
@@ -417,12 +441,13 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
         <section class="w-full flex flex-col gap-6">
 
-            <!-- STEP 1: THE CRISIS -->
+            <!-- STEP 1: THE CRISIS (CLEANED UP NO PARENTHESES OR ASTERISKS, ENLARGED FONTS) -->
             <div id="step-1" class="step-container space-y-6">
                 <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
                         <h2 class="text-3xl font-black text-slate-800 flex items-center gap-3">
-                            <span>מחשב קצה (Host / PC / Server)</span>
+                            <span>מחשב קצה</span>
+                            <span class="eng-box text-lg font-bold text-slate-700">Host / PC / Server</span>
                             <span class="text-3xl">💻</span>
                         </h2>
                         <span class="bg-red-100 text-red-600 text-sm font-extrabold px-4 py-1.5 rounded-full border border-red-200">אתגר הארכיטקטורה</span>
@@ -431,130 +456,155 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         <div class="lg:col-span-8 space-y-5">
                             <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-6 text-right">
-                                <h3 class="text-sky-800 font-extrabold text-xl mb-3 flex items-center gap-2">
+                                <h3 class="text-sky-800 font-extrabold text-2xl mb-3 flex items-center gap-2">
                                     <i data-lucide="zap" class="w-6 h-6 text-sky-600"></i>
                                     <span>פרדוקס החומה והגשר</span>
                                 </h3>
-                                <p class="text-base text-slate-700 leading-relaxed font-semibold">
-                                    בשיעור 4 בנינו חומות אבטחה מעולות: חילקנו את המתג (Switch) ל-**VLAN 10 (HR)** ו-**VLAN 20 (R&D)**. אף מחלקה לא יכולה להציץ או להאזין לשנייה ברמת שכבה 2.
+                                <p class="text-lg text-slate-700 leading-relaxed font-semibold">
+                                    בשיעור 4 בנינו חומות אבטחה מעולות. חילקנו את המתג 
+                                    <span class="eng-box text-sm">Switch</span> 
+                                    לרשת 
+                                    <span class="eng-box text-sm">VLAN 10 HR</span> 
+                                    ולרשת 
+                                    <span class="eng-box text-sm">VLAN 20 R&D</span>. 
+                                    אף מחלקה לא יכולה להציץ או להאזין לשנייה ברמת שכבה 2.
                                     <br><br>
-                                    אבל כעת המנכ"ל מוציא הנחיה חדשה: <span class="text-sky-700 font-black">מחלקת משאבי אנוש חייבת לקבל גישה לשרת הפיתוח החדש שנמצא בתוך VLAN 20!</span> אנחנו לא רוצים לבטל את ה-VLAN-ים ולחזור לרשת פתוחה ופרוצה. איך מאפשרים לשתי רשתות מבודדות לדבר זו עם זו בצורה מבוקרת ומאובטחת?
+                                    אבל כעת המנכ"ל מוציא הנחיה חדשה: <span class="text-sky-700 font-black">מחלקת משאבי אנוש חייבת לקבל גישה לשרת הפיתוח החדש שנמצא בתוך רשת הפיתוח.</span> אנחנו לא רוצים לבטל את החלוקה לרשתות ולחזור לרשת פתוחה ופרוצה. איך מאפשרים לשתי רשתות מבודדות לדבר זו עם זו בצורה מבוקרת ומאובטחת?
                                 </p>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl">
-                                    <h4 class="text-red-600 font-extrabold text-base mb-2 flex items-center gap-2">
+                                    <h4 class="text-red-600 font-extrabold text-lg mb-2 flex items-center gap-2">
                                         <i data-lucide="shield-alert" class="w-5 h-5"></i>
                                         למה אי אפשר לעשות את זה במתג?
                                     </h4>
-                                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
-                                        מתג רגיל (Layer 2 Switch) עיוור לכתובות IP. הוא עובד רק עם תגיות VLAN וכתובות MAC. הוא מתוכנת לחסום מעבר פריים בין VLAN 10 ל-VLAN 20 ללא יוצא מן הכלל.
+                                    <p class="text-base text-slate-600 leading-relaxed font-medium">
+                                        מתג רגיל 
+                                        <span class="eng-box text-xs">Layer 2 Switch</span> 
+                                        עיוור לכתובות 
+                                        <span class="eng-box text-xs">IP</span>. 
+                                        הוא עובד רק עם תגיות רשת וכתובות 
+                                        <span class="eng-box text-xs">MAC</span>. 
+                                        הוא מתוכנת לחסום מעבר מידע בין רשתות מופרדות ללא יוצא מן הכלל.
                                     </p>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl">
-                                    <h4 class="text-emerald-600 font-extrabold text-base mb-2 flex items-center gap-2">
+                                    <h4 class="text-emerald-600 font-extrabold text-lg mb-2 flex items-center gap-2">
                                         <i data-lucide="router" class="w-5 h-5"></i>
-                                        הנתב כשומר הסף (שכבה 3)
+                                        הנתב כשומר הסף בשכבה 3
                                     </h4>
-                                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
-                                        הנתב (Router) מבין כתובות IP וניתוב. הוא יכול לשמש כ"שער אגרה" המחבר בין שתי המדינות השונות. חבילה שרוצה לעבור תעלה לראוטר, תעבור בדיקה ביטחונית ותוזרם ליעדה!
+                                    <p class="text-base text-slate-600 leading-relaxed font-medium">
+                                        הנתב 
+                                        <span class="eng-box text-xs">Router</span> 
+                                        מבין כתובות 
+                                        <span class="eng-box text-xs">IP</span> 
+                                        וניתוב. הוא יכול לשמש כמשמר גבול המחבר בין שתי המדינות השונות. חבילה שרוצה לעבור תעלה לנתב, תעבור בדיקה ביטחונית ותוזרם ליעדה.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between text-sm font-semibold text-slate-600 space-y-4">
-                            <div class="space-y-3 border-b border-slate-200 pb-4">
+                        <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between text-base font-semibold text-slate-600 space-y-4">
+                            <div class="space-y-4 border-b border-slate-200 pb-4">
                                 <div class="flex justify-between items-center">
-                                    <span>שכבת OSI:</span>
-                                    <span class="font-bold text-slate-800 text-base">Layers 7 - 1 (All)</span>
+                                    <span>שכבת מודל התקשורת:</span>
+                                    <span class="eng-box font-bold text-slate-800 text-sm">Layers 7 - 1</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span>יחידת מידע (PDU):</span>
-                                    <span class="font-bold text-slate-800 text-base">Data / Segment</span>
+                                    <span>יחידת מידע:</span>
+                                    <span class="eng-box font-bold text-slate-800 text-sm">Data / Segment</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span>תפקיד עיקרי:</span>
-                                    <span class="font-bold text-slate-800 text-base">End-Host (מקור/יעד)</span>
+                                    <span class="font-bold text-slate-800 text-base">מקור או יעד</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span>מזהה רשת:</span>
-                                    <span class="font-bold text-slate-800 text-base">IP & Hostname</span>
+                                    <span class="eng-box font-bold text-slate-800 text-sm">IP & Hostname</span>
                                 </div>
                             </div>
 
                             <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
                                 <span class="text-xs font-bold text-slate-400 block mb-1">פרוטוקולי יישום</span>
-                                <span class="font-extrabold text-slate-800 text-base">HTTP, HTTPS, FTP, DNS</span>
+                                <span class="eng-box font-extrabold text-slate-800 text-sm">HTTP, HTTPS, FTP, DNS</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-8 bg-amber-50 border border-amber-300 rounded-xl p-6">
-                        <h4 class="text-amber-800 font-extrabold text-lg mb-3 flex items-center gap-2">
+                        <h4 class="text-amber-800 font-extrabold text-xl mb-3 flex items-center gap-2">
                             <i data-lucide="flame" class="w-6 h-6 text-amber-600"></i>
                             <span>שאלה אסטרטגית של השותפים</span>
                         </h4>
-                        <p class="text-sm text-amber-900 font-bold mb-4">אם יש לנו 50 VLAN-ים שונים ברשת, האם נצטרך למתוח 50 כבלים פיזיים נפרדים מהמתג אל הנתב?</p>
+                        <p class="text-base text-amber-900 font-bold mb-4">אם יש לנו 50 רשתות נפרדות, האם נצטרך למתוח 50 כבלים פיזיים נפרדים מהמתג אל הנתב?</p>
                         <div class="flex flex-col gap-3">
-                            <button onclick="answerScenario(1)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-sm px-5 py-3 rounded-lg font-bold transition-all shadow-sm">כן, חייב כבל פיזי בודד עבור כל VLAN נפרד כדי למנוע ערבוב אותות.</button>
-                            <button onclick="answerScenario(2)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-sm px-5 py-3 rounded-lg font-bold transition-all shadow-sm">ממש לא! נשתמש בכבל פיזי יחיד המוגדר כ-Trunk, ונפצל את פורט הנתב לוגית לתתי-ממשקים (Subinterfaces) – פתרון המכונה Router on a Stick!</button>
+                            <button onclick="answerScenario(1)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-base px-5 py-3 rounded-lg font-bold transition-all shadow-sm">כן, חייב כבל פיזי בודד עבור כל רשת נפרדת כדי למנוע ערבוב אותות.</button>
+                            <button onclick="answerScenario(2)" class="bg-white hover:bg-amber-100/60 text-right border border-amber-300 text-slate-800 text-base px-5 py-3 rounded-lg font-bold transition-all shadow-sm">ממש לא. נשתמש בכבל פיזי יחיד המוגדר כערוץ ראשי, ונפצל את יציאת הנתב לוגית לתתי-ממשקים. פתרון המכונה <span class="eng-box text-xs">Router on a Stick</span>.</button>
                         </div>
-                        <div id="scenario-feedback" class="mt-4 hidden p-4 rounded-lg text-sm font-bold"></div>
+                        <div id="scenario-feedback" class="mt-4 hidden p-4 rounded-lg text-base font-bold"></div>
                     </div>
                 </div>
                 
                 <div class="flex justify-end">
-                    <button onclick="switchStep(2)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-base px-8 py-4 rounded-xl flex items-center gap-3 transition-all shadow-md">
+                    <button onclick="switchStep(2)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-lg px-8 py-4 rounded-xl flex items-center gap-3 transition-all shadow-md">
                         <span>גלה את פלא ה-Router on a Stick</span>
                         <i data-lucide="arrow-left" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 2: THEORY -->
+            <!-- STEP 2: THEORY (LTR/RTL STRICTLY HANDLED) -->
             <div id="step-2" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <span class="text-sky-600 text-xs font-extrabold uppercase tracking-wider">תיאוריה חיונית</span>
-                    <h2 class="text-3xl font-black text-slate-800 mt-1 mb-4">Router on a Stick: כבל פיזי אחד, רשתות מרובות</h2>
+                    <span class="text-sky-600 text-sm font-extrabold uppercase tracking-wider">תיאוריה חיונית</span>
+                    <h2 class="text-3xl font-black text-slate-800 mt-1 mb-4 flex items-center gap-2">
+                        <span>סוד תתי הממשקים</span>
+                        <span class="eng-box text-xl">Router on a Stick</span>
+                    </h2>
                     
-                    <p class="text-slate-700 leading-relaxed text-base mb-6 font-semibold">
-                        במקום לבזבז פורטים פיזיים יקרים על הנתב, אנחנו משתמשים בשיטת **Router on a Stick (RoaS)**. 
-                        אנחנו לוקחים כבל פיזי בודד, מחברים אותו לפורט מהיר בנתב (למשל GigabitEthernet 0/0), ומגדירים את הצד של המתג כ-**Trunk** (שיודע להעביר את כל תגיות ה-VLAN על כבל אחד).
+                    <p class="text-slate-700 leading-relaxed text-lg mb-6 font-semibold">
+                        במקום לבזבז יציאות פיזיות יקרות על הנתב, אנחנו משתמשים בשיטת 
+                        <span class="eng-box text-sm">Router on a Stick</span>. 
+                        אנחנו לוקחים כבל פיזי בודד, מחברים אותו ליציאה מהירה בנתב למשל 
+                        <span class="eng-box text-sm">GigabitEthernet 0/0</span>, 
+                        ומגדירים את הצד של המתג כערוץ 
+                        <span class="eng-box text-sm">Trunk</span> 
+                        שיודע להעביר את כל תגיות ה-VLAN על כבל אחד.
                     </p>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-6">
                         
                         <div class="lg:col-span-7 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-5">
-                            <div class="text-right text-base text-slate-800 font-black">איך פורט פיזי בודד מתפצל לוגית?</div>
+                            <div class="text-right text-lg text-slate-800 font-black">איך יציאה פיזית בודדת מתפצלת לוגית?</div>
                             
                             <div class="space-y-4">
                                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
-                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">1. הפיצול (Subinterfaces)</span>
-                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
-                                        מפצלים את הממשק הפיזי <code class="bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded border border-sky-200">Gi0/0</code> בעזרת נקודה:
+                                    <span class="text-sky-600 font-black text-xl block mb-2">1. הפיצול הלוגי Subinterfaces</span>
+                                    <p class="text-base text-slate-700 font-bold leading-relaxed">
+                                        מפצלים את הממשק הפיזי <span class="eng-box text-sm">Gi0/0</span> בעזרת נקודה:
                                         <br>
-                                        <code class="text-sky-800 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">Gi0/0.10</code> עבור VLAN 10, ו-
-                                        <code class="text-sky-800 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">Gi0/0.20</code> עבור VLAN 20.
+                                        <span class="eng-box text-sm font-bold text-sky-800 mt-1">Gi0/0.10</span> עבור <span class="eng-box text-sm">VLAN 10</span>
+                                        ו-
+                                        <span class="eng-box text-sm font-bold text-sky-800 mt-1">Gi0/0.20</span> עבור <span class="eng-box text-sm">VLAN 20</span>.
                                     </p>
                                 </div>
                                 
                                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
-                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">2. התגיות (Encapsulation dot1Q)</span>
-                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
-                                        מורים לכל תת-ממשק לוגי לאיזה מספר VLAN הוא משוייך. הנתב קורא ומסיר את התג בכניסה, ומוסיף תג ביציאה:
+                                    <span class="text-sky-600 font-black text-xl block mb-2">2. התגיות Encapsulation dot1Q</span>
+                                    <p class="text-base text-slate-700 font-bold leading-relaxed">
+                                        מורים לכל תת-ממשק לוגי לאיזה מספר VLAN הוא משויך. הנתב קורא ומסיר את התג בכניסה, ומוסיף תג ביציאה:
                                         <br>
-                                        <code class="text-red-700 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">encapsulation dot1Q 10</code>
+                                        <span class="eng-box text-sm font-bold text-red-700 mt-1">encapsulation dot1Q 10</span>
                                     </p>
                                 </div>
                                 
                                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-right">
-                                    <span class="text-sky-600 font-black code-font text-xl block mb-1">3. השער (Default Gateway)</span>
-                                    <p class="text-sm text-slate-700 font-bold leading-relaxed">
-                                        כל תת-ממשק מקבל כתובת IP משלו המתפקדת כ-Default Gateway של רשת ה-VLAN הספציפית שלו:
+                                    <span class="text-sky-600 font-black text-xl block mb-2">3. השער Default Gateway</span>
+                                    <p class="text-base text-slate-700 font-bold leading-relaxed">
+                                        כל תת-ממשק מקבל כתובת IP משלו המתפקדת ככתובת השער של רשת ה-VLAN הספציפית שלו:
                                         <br>
-                                        <code class="text-emerald-700 bg-slate-100 px-2 py-0.5 rounded font-mono text-xs">ip address 192.168.10.1 255.255.255.0</code>
+                                        <span class="eng-box text-sm font-bold text-emerald-700 mt-1">ip address 192.168.10.1 255.255.255.0</span>
                                     </p>
                                 </div>
                             </div>
@@ -563,26 +613,26 @@
                         <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between items-center relative overflow-hidden">
                             <div class="w-full text-center border-b border-slate-700 pb-3">
                                 <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">סכמת RoaS ויזואלית</span>
-                                <h3 class="font-extrabold text-base text-slate-100 mt-2">Router on a Stick</h3>
+                                <h3 class="font-extrabold text-lg text-slate-100 mt-2 eng-box bg-transparent border-none text-white">Router on a Stick</h3>
                             </div>
 
                             <div class="my-6 w-full flex flex-col items-center gap-2 relative">
                                 <div class="w-24 h-24 rounded-full bg-slate-800 border-4 border-red-500 flex flex-col items-center justify-center shadow-lg shadow-red-500/20 z-10 relative">
                                     <i data-lucide="router" class="w-10 h-10 text-red-400"></i>
-                                    <span class="font-mono text-xs font-extrabold text-white mt-0.5">Router (R1)</span>
+                                    <span class="code-font text-xs font-extrabold text-white mt-0.5">Router R1</span>
                                 </div>
 
                                 <div class="relative w-full flex justify-center py-2">
                                     <div class="w-3 bg-gradient-to-b from-red-500 via-amber-400 to-sky-500 h-28 rounded-full shadow-md animate-pulse"></div>
                                     
-                                    <div class="absolute right-[12%] top-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-[11px] font-mono text-sky-300 shadow">
-                                        <span>Gi0/0.10</span> ➔ <span class="text-sky-400 font-bold">VLAN 10</span>
+                                    <div class="absolute right-[5%] top-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-xs code-font text-sky-300 shadow">
+                                        Gi0/0.10 ➔ VLAN 10
                                     </div>
-                                    <div class="absolute left-[12%] bottom-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-[11px] font-mono text-amber-300 shadow">
-                                        <span>Gi0/0.20</span> ➔ <span class="text-amber-400 font-bold">VLAN 20</span>
+                                    <div class="absolute left-[5%] bottom-2 bg-slate-800/90 border border-slate-600 rounded-lg px-2.5 py-1 text-xs code-font text-amber-300 shadow">
+                                        Gi0/0.20 ➔ VLAN 20
                                     </div>
-                                    <div class="absolute bg-red-600 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full shadow top-1/2 -translate-y-1/2">
-                                        Trunk 802.1Q (כבל יחיד)
+                                    <div class="absolute bg-red-600 text-white font-extrabold text-xs px-2 py-0.5 rounded-full shadow top-1/2 -translate-y-1/2 code-font">
+                                        Trunk 802.1Q
                                     </div>
                                 </div>
 
@@ -592,31 +642,31 @@
                                         <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                                         <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                                     </div>
-                                    <span class="font-mono text-xs font-bold text-slate-200">Switch (Layer 2)</span>
+                                    <span class="code-font text-xs font-bold text-slate-200">Switch Layer 2</span>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-4 w-full mt-3 text-center">
                                     <div class="bg-sky-950/60 border border-sky-500/40 p-2.5 rounded-lg">
-                                        <span class="text-xs font-extrabold text-sky-400 block">VLAN 10 (HR)</span>
-                                        <span class="text-[10px] font-mono text-slate-400">192.168.10.0/24</span>
+                                        <span class="text-xs font-extrabold text-sky-400 block eng-box bg-transparent border-none">VLAN 10 HR</span>
+                                        <span class="text-xs code-font text-slate-300">192.168.10.0/24</span>
                                     </div>
                                     <div class="bg-amber-950/60 border border-amber-500/40 p-2.5 rounded-lg">
-                                        <span class="text-xs font-extrabold text-amber-400 block">VLAN 20 (R&D)</span>
-                                        <span class="text-[10px] font-mono text-slate-400">192.168.20.0/24</span>
+                                        <span class="text-xs font-extrabold text-amber-400 block eng-box bg-transparent border-none">VLAN 20 R&D</span>
+                                        <span class="text-xs code-font text-slate-300">192.168.20.0/24</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <p class="text-xs text-slate-400 text-center font-medium leading-relaxed bg-slate-800/50 p-2.5 rounded-lg border border-slate-700 w-full">
-                                💡 **המקל (Stick):** הכבל הפיזי היחיד שמעביר את כל המידע המתוייג אל הנתב וממנו חזרה למתג.
+                            <p class="text-sm text-slate-300 text-center font-medium leading-relaxed bg-slate-800/50 p-2.5 rounded-lg border border-slate-700 w-full">
+                                💡 הכבל הפיזי היחיד מעביר את כל המידע המתוייג אל הנתב וממנו חזרה למתג.
                             </p>
                         </div>
 
                     </div>
 
                     <div class="pt-4 border-t border-slate-200">
-                        <span class="text-xs text-slate-600 block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות (Cisco IOS CLI):</span>
-                        <pre class="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-xs space-y-1 text-left overflow-x-auto shadow-inner" dir="ltr">
+                        <span class="text-sm text-slate-700 block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות Cisco IOS CLI:</span>
+                        <pre class="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-sm space-y-1 text-left overflow-x-auto shadow-inner" dir="ltr">
 Router(config)# interface GigabitEthernet 0/0.10
 Router(config-subif)# encapsulation dot1Q 10
 Router(config-subif)# ip address 192.168.10.1 255.255.255.0
@@ -627,18 +677,18 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 </div>
                 
                 <div class="flex justify-between">
-                    <button onclick="switchStep(1)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 transition-all">
+                    <button onclick="switchStep(1)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl flex items-center gap-2 transition-all text-base">
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         <span>חזרה לפרדוקס</span>
                     </button>
-                    <button onclick="switchStep(3)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md">
+                    <button onclick="switchStep(3)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-7 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md text-base">
                         <span>לסימולטור הגשר הלוגי</span>
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 3: SIMULATOR -->
+            <!-- STEP 3: SIMULATOR (ENLARGED FONTS & LTR ENCAPSULATION) -->
             <div id="step-3" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     
@@ -700,9 +750,9 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
 
                             <div class="legend">
-                                <div class="item"><span class="swatch" style="background:var(--vlan10);"></span> VLAN 10 — Access</div>
-                                <div class="item"><span class="swatch" style="background:var(--vlan20);"></span> VLAN 20 — Access</div>
-                                <div class="item"><span class="swatch" style="background:var(--red);"></span> Trunk (802.1Q)</div>
+                                <div class="item"><span class="swatch" style="background:var(--vlan10);"></span> <span class="eng-box text-xs">VLAN 10 Access</span></div>
+                                <div class="item"><span class="swatch" style="background:var(--vlan20);"></span> <span class="eng-box text-xs">VLAN 20 Access</span></div>
+                                <div class="item"><span class="swatch" style="background:var(--red);"></span> <span class="eng-box text-xs">Trunk 802.1Q</span></div>
                                 <div class="item">✉ = החבילה הנשלחת</div>
                             </div>
                         </div>
@@ -712,7 +762,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             <div class="sim-card">
                                 <h2><span class="num">02</span> בחירת מקור ויעד</h2>
                                 <div class="select-row">
-                                    <label>מקור (Source)</label>
+                                    <label>מקור Source</label>
                                     <select id="srcSelect">
                                         <option value="pc1">PC1 — VLAN 10 — 192.168.10.10</option>
                                         <option value="pc2">PC2 — VLAN 10 — 192.168.10.11</option>
@@ -722,7 +772,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                                 </div>
                                 <div class="arrow-sep">↓</div>
                                 <div class="select-row">
-                                    <label>יעד (Destination)</label>
+                                    <label>יעד Destination</label>
                                     <select id="dstSelect">
                                         <option value="pc3">PC3 — VLAN 20 — 192.168.20.10</option>
                                         <option value="pc1">PC1 — VLAN 10 — 192.168.10.10</option>
@@ -730,10 +780,10 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                                         <option value="pc4">PC4 — VLAN 20 — 192.168.20.11</option>
                                     </select>
                                 </div>
-                                <div class="info-mini"><span>מסלול צפוי:</span><span id="routeInfo">חוצה VLANים — עובר דרך R1</span></div>
+                                <div class="info-mini"><span>מסלול צפוי:</span><span id="routeInfo" class="text-slate-800 font-bold">חוצה VLANים — עובר דרך R1</span></div>
 
                                 <div class="btn-row">
-                                    <button class="sim-btn btn-primary" id="sendBtn">שלח חבילה ▶</button>
+                                    <button class="sim-btn btn-primary text-base" id="sendBtn">שלח חבילה ▶</button>
                                     <button class="sim-btn btn-ghost" id="resetBtn">איפוס ↺</button>
                                 </div>
                                 <div class="btn-row">
@@ -749,18 +799,18 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                                 <h2><span class="num">03</span> מעטפת החבילה</h2>
                                 <div class="frame-outer">
                                     <div class="frame-title">ETHERNET FRAME</div>
-                                    <div class="frame-field"><span class="k">כתובת מקור (Src MAC)</span><span class="v" id="fSrcMac">—</span></div>
-                                    <div class="frame-field"><span class="k">כתובת יעד (Dst MAC)</span><span class="v" id="fDstMac">—</span></div>
+                                    <div class="frame-field"><span class="k">Src MAC</span><span class="v" id="fSrcMac">—</span></div>
+                                    <div class="frame-field"><span class="k">Dst MAC</span><span class="v" id="fDstMac">—</span></div>
 
                                     <div class="vlan-tag-block" id="vlanTagBlock">
-                                        <span>🏷 תג 802.1Q</span>
+                                        <span>🏷 802.1Q Tag</span>
                                         <span id="vlanTagVal">VLAN —</span>
                                     </div>
 
                                     <div class="ip-inner">
                                         <div class="frame-title">IP PACKET</div>
-                                        <div class="frame-field"><span class="k">כתובת מקור (Src IP)</span><span class="v" id="fSrcIp">—</span></div>
-                                        <div class="frame-field"><span class="k">כתובת יעד (Dst IP)</span><span class="v" id="fDstIp">—</span></div>
+                                        <div class="frame-field"><span class="k">Src IP</span><span class="v" id="fSrcIp">—</span></div>
+                                        <div class="frame-field"><span class="k">Dst IP</span><span class="v" id="fDstIp">—</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -769,7 +819,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
                     <!-- CLI -->
                     <div class="sim-card cli-card">
-                        <h2><span class="num">04</span> תרגול שורת פקודות (Cisco IOS — R1)</h2>
+                        <h2><span class="num">04</span> תרגול שורת פקודות Cisco IOS — R1</h2>
                         <div class="terminal" id="terminal">
                             <div class="ln">R1 con0 is now available</div>
                             <div class="ln">Press RETURN to get started.</div>
@@ -779,36 +829,36 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
                         </div>
                         <div class="cli-hint">
-                            נסו: <code>enable</code> → <code>configure terminal</code> → <code>interface gi0/0.10</code> → <code>encapsulation dot1Q 10</code> → <code>ip address 192.168.10.1 255.255.255.0</code> → <code>no shutdown</code> → <code>end</code> → <code>show ip interface brief</code>
+                            נסו: <code>enable</code> ➔ <code>configure terminal</code> ➔ <code>interface gi0/0.10</code> ➔ <code>encapsulation dot1Q 10</code> ➔ <code>ip address 192.168.10.1 255.255.255.0</code> ➔ <code>no shutdown</code> ➔ <code>end</code> ➔ <code>show ip interface brief</code>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="flex justify-between">
-                    <button onclick="switchStep(2)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 transition-all">
+                    <button onclick="switchStep(2)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl flex items-center gap-2 transition-all text-base">
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         <span>חזרה להסבר</span>
                     </button>
-                    <button id="btn-to-step-4" onclick="switchStep(4)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md">
+                    <button id="btn-to-step-4" onclick="switchStep(4)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-7 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md text-base">
                         <span>המשך לאתגר ה-AI</span>
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 4: AI TROUBLESHOOTING (FONTS ENLARGED) -->
+            <!-- STEP 4: AI TROUBLESHOOTING (ENLARGED FONTS & ENGLISH FRAMING) -->
             <div id="step-4" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <div class="flex justify-between items-start flex-wrap gap-4 border-b border-slate-100 pb-4">
                         <div>
-                            <span class="bg-amber-100 text-amber-800 border border-amber-200 text-sm px-4 py-1.5 rounded-full font-extrabold uppercase">אתגר פתרון תקלות AI</span>
+                            <span class="bg-amber-100 text-amber-800 border border-amber-200 text-base px-4 py-1.5 rounded-full font-extrabold uppercase">אתגר פתרון תקלות AI</span>
                             <h2 class="text-3xl font-black text-slate-800 mt-2">לחקור את אסף: למה הפינג לא עובד?</h2>
-                            <p class="text-slate-600 text-sm font-semibold mt-1">
-                                אסף, טכנאי זוטר במחלקה שלך, הגדיר תשתית Router on a Stick בקמפוס אבל התקשורת מתה. חקור אותו בשאלות בצ'אט כדי למצוא את המחדל!
+                            <p class="text-slate-600 text-base font-semibold mt-1">
+                                אסף, טכנאי זוטר במחלקה שלך, הגדיר תשתית <span class="eng-box text-xs">Router on a Stick</span> בקמפוס אבל התקשורת מתה. חקור אותו בשאלות בצ'אט כדי למצוא את המחדל!
                             </p>
                         </div>
-                        <div class="bg-red-50 border border-red-200 px-4 py-1.5 rounded-full text-xs text-red-600 font-bold code-font flex items-center gap-2">
+                        <div class="bg-red-50 border border-red-200 px-4 py-2 rounded-full text-sm text-red-600 font-bold code-font flex items-center gap-2">
                             <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
                             <span>STATUS: SYSTEM_ALERT (DOWN)</span>
                         </div>
@@ -820,20 +870,20 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                                 🙇‍♂️
                             </div>
                             <div>
-                                <h3 class="font-extrabold text-slate-800 text-base">אסף (טכנאי רשתות זוטר)</h3>
-                                <p class="text-xs text-slate-600 font-bold mt-1">"אני בטוח ב-100% שהגדרתי את ה-dot1Q וה-IP הנכונים בתתי-הממשקים! בדקתי שלוש פעמים!"</p>
+                                <h3 class="font-extrabold text-slate-800 text-lg">אסף (טכנאי רשתות זוטר)</h3>
+                                <p class="text-sm text-slate-600 font-bold mt-2">"אני בטוח ב-100% שהגדרתי את ה-dot1Q וה-IP הנכונים בתתי-הממשקים! בדקתי שלוש פעמים!"</p>
                             </div>
-                            <div class="bg-white p-4 rounded-lg border border-slate-200 text-right space-y-2 text-xs">
-                                <span class="text-xs font-black text-slate-500 block">רמזים לחקירה:</span>
-                                <p class="text-xs text-slate-700 font-bold leading-relaxed">💡 שאל אותו על הסטטוס של ה-**ממשק הפיזי** (Physical Interface G0/0) שלו.</p>
-                                <p class="text-xs text-slate-700 font-bold leading-relaxed">💡 בדוק האם הוא זכר להפעיל פקודת **no shutdown** או לבדוק trunk במתג.</p>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 text-right space-y-2 text-sm">
+                                <span class="text-sm font-black text-slate-700 block border-b border-slate-100 pb-1">רמזים לחקירה:</span>
+                                <p class="text-sm text-slate-700 font-bold leading-relaxed">💡 שאל אותו על הסטטוס של הממשק הפיזי <span class="eng-box text-xs">Physical Interface G0/0</span> שלו.</p>
+                                <p class="text-sm text-slate-700 font-bold leading-relaxed">💡 בדוק האם הוא זכר להפעיל פקודת <span class="eng-box text-xs">no shutdown</span> או לבדוק <span class="eng-box text-xs">trunk</span> במתג.</p>
                             </div>
                         </div>
 
-                        <div class="md:col-span-8 bg-slate-50 border border-slate-200 rounded-xl flex flex-col h-[420px] overflow-hidden">
+                        <div class="md:col-span-8 bg-slate-50 border border-slate-200 rounded-xl flex flex-col h-[440px] overflow-hidden">
                             <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-3 flex flex-col">
-                                <div class="bg-white p-4 rounded-xl border border-slate-200 max-w-[85%] self-start text-sm text-slate-800 shadow-sm font-semibold leading-relaxed">
-                                    <span class="text-xs font-black text-red-600 block mb-1">ASAF_JUNIOR_ADMIN // </span>
+                                <div class="bg-white p-4 rounded-xl border border-slate-200 max-w-[85%] self-start text-base text-slate-800 shadow-sm font-semibold leading-relaxed">
+                                    <span class="text-xs font-black text-red-600 block mb-1 code-font">ASAF_JUNIOR_ADMIN // </span>
                                     היי! תודה שבאת לעזור לי. המנכ"ל צורח עליי שהאינטרנט קרס. 
                                     הגדרתי את הממשקים <code>G0/0.10</code> ו-<code>G0/0.20</code> בדיוק עם מסכות ו-IP כנדרש. הפינג מ-VLAN 10 ל-VLAN 20 פשוט נכשל לחלוטין.
                                     <br><br>
@@ -842,8 +892,8 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
                             
                             <div class="p-3 border-t border-slate-200 bg-white flex gap-2">
-                                <input type="text" id="chat-input" onkeypress="handleChatKey(event)" placeholder="שאל את אסף שאלה (למשל: 'האם עשית no shutdown?')..." class="flex-grow bg-slate-50 text-slate-800 font-bold border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-sky-500">
-                                <button onclick="sendChatMessage()" class="bg-sky-600 hover:bg-sky-500 text-white px-5 py-2.5 rounded-lg text-sm font-extrabold flex items-center gap-2 transition-all shadow">
+                                <input type="text" id="chat-input" onkeypress="handleChatKey(event)" placeholder="שאל את אסף שאלה (למשל: 'האם עשית no shutdown?')..." class="flex-grow bg-slate-50 text-slate-800 font-bold border border-slate-200 rounded-lg px-4 py-3 text-base focus:outline-none focus:border-sky-500">
+                                <button onclick="sendChatMessage()" class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-3 rounded-lg text-base font-extrabold flex items-center gap-2 transition-all shadow">
                                     <span>שלח</span>
                                     <i data-lucide="send" class="w-4 h-4"></i>
                                 </button>
@@ -853,59 +903,73 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
                     <div id="ai-bonus-alert" class="mt-4 hidden bg-emerald-50 border border-emerald-200 text-emerald-800 p-5 rounded-xl flex items-center justify-between shadow-sm">
                         <div class="flex items-center gap-3">
-                            <span class="text-2xl">🏆</span>
+                            <span class="text-3xl">🏆</span>
                             <div>
-                                <p class="font-extrabold text-base">הישג נפתח! מאבחן תקלות בכיר (Network Troubleshooter)</p>
-                                <p class="text-sm opacity-90 font-semibold">חקרת ופתרת את התקלה הקריטית בבידוד הפיזי של הנתב.</p>
+                                <p class="font-extrabold text-lg">הישג נפתח! מאבחן תקלות בכיר (Network Troubleshooter)</p>
+                                <p class="text-base opacity-90 font-semibold">חקרת ופתרת את התקלה הקריטית בבידוד הפיזי של הנתב.</p>
                             </div>
                         </div>
-                        <span class="font-mono text-sm text-emerald-700 font-black">+100 XP</span>
+                        <span class="code-font text-base text-emerald-700 font-black">+100 XP</span>
                     </div>
 
                 </div>
                 <div class="flex justify-between">
-                    <button onclick="switchStep(3)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-xl flex items-center gap-2 transition-all">
+                    <button onclick="switchStep(3)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl flex items-center gap-2 transition-all text-base">
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         <span>חזרה למעבדה</span>
                     </button>
-                    <button id="btn-to-step-5" onclick="switchStep(5)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md disabled:opacity-40 disabled:pointer-events-none" disabled>
+                    <button id="btn-to-step-5" onclick="switchStep(5)" class="bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-7 py-3 rounded-xl flex items-center gap-2 transition-all shadow-md text-base disabled:opacity-40 disabled:pointer-events-none" disabled>
                         <span>עבור לדוח סיום המשימה</span>
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 5: REPORT (FONTS ENLARGED) -->
+            <!-- STEP 5: REPORT (FONTS ENLARGED & FRAMED ENGLISH) -->
             <div id="step-5" class="step-container space-y-6 hidden">
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <span class="text-sky-600 text-xs font-extrabold uppercase tracking-wider">משוב עמיתים וסגירת דוח</span>
-                    <h2 class="text-3xl font-black text-slate-800 mt-1 mb-4">תעודת מהנדס ה-Inter-VLAN שלך מוכנה!</h2>
+                    <span class="text-sky-600 text-sm font-extrabold uppercase tracking-wider">משוב עמיתים וסגירת דוח</span>
+                    <h2 class="text-3xl font-black text-slate-800 mt-1 mb-4 flex items-center gap-2">
+                        <span>תעודת מהנדס</span>
+                        <span class="eng-box text-xl">Inter-VLAN</span>
+                        <span>שלך מוכנה!</span>
+                    </h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
-                            <h3 class="font-extrabold text-slate-800 text-base">רפלקציה עצמית למורה</h3>
-                            <p class="text-xs text-slate-500 font-bold">השלם את המחשבות שלך על השיעור והמידע הזה יישלח למורה שלך בקליק.</p>
+                            <h3 class="font-extrabold text-slate-800 text-lg">רפלקציה עצמית למורה</h3>
+                            <p class="text-sm text-slate-600 font-bold">השלם את המחשבות שלך על השיעור והמידע הזה יישלח למורה שלך בקליק.</p>
                             
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-extrabold text-slate-700 mb-1.5">1. מדוע תתי-ממשקים (Subinterfaces) בנתב לא יעבדו אם הממשק הפיזי הראשי נמצא במצב shutdown?</label>
-                                    <textarea id="reflection-q1" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-sm text-slate-800 font-semibold focus:outline-none focus:border-sky-500" rows="3" placeholder="הסבר במילים שלך..."></textarea>
+                                    <label class="block text-base font-extrabold text-slate-700 mb-1.5">
+                                        1. מדוע תתי-ממשקים 
+                                        <span class="eng-box text-xs">Subinterfaces</span> 
+                                        בנתב לא יעבדו אם הממשק הפיזי הראשי נמצא במצב 
+                                        <span class="eng-box text-xs">shutdown</span>?
+                                    </label>
+                                    <textarea id="reflection-q1" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-base text-slate-800 font-semibold focus:outline-none focus:border-sky-500" rows="3" placeholder="הסבר במילים שלך..."></textarea>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-extrabold text-slate-700 mb-1.5">2. מהי החשיבות של פקודת 'encapsulation dot1Q [id]' בהגדרת Router on a Stick?</label>
-                                    <textarea id="reflection-q2" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-sm text-slate-800 font-semibold focus:outline-none focus:border-sky-500" rows="3" placeholder="פרט בקצרה..."></textarea>
+                                    <label class="block text-base font-extrabold text-slate-700 mb-1.5">
+                                        2. מהי החשיבות של פקודת 
+                                        <span class="eng-box text-xs">encapsulation dot1Q [id]</span> 
+                                        בהגדרת 
+                                        <span class="eng-box text-xs">Router on a Stick</span>?
+                                    </label>
+                                    <textarea id="reflection-q2" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-base text-slate-800 font-semibold focus:outline-none focus:border-sky-500" rows="3" placeholder="פרט בקצרה..."></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
                             <div>
-                                <h3 class="font-extrabold text-slate-800 text-base mb-1">שתף הצלחה עם החברים</h3>
-                                <p class="text-xs text-slate-500 font-bold mb-4">העתק את קוד ההישג שלך ושתף אותו כדי להראות שחיברת בהצלחה את האיים המבודדים!</p>
+                                <h3 class="font-extrabold text-slate-800 text-lg mb-1">שתף הצלחה עם החברים</h3>
+                                <p class="text-sm text-slate-600 font-bold mb-4">העתק את קוד ההישג שלך ושתף אותו כדי להראות שחיברת בהצלחה את האיים המבודדים!</p>
                                 
-                                <div class="bg-white p-4 rounded-lg border border-slate-200 code-font text-sm flex justify-between items-center text-sky-700 font-bold shadow-sm">
+                                <div class="bg-white p-4 rounded-lg border border-slate-200 code-font text-base flex justify-between items-center text-sky-700 font-bold shadow-sm">
                                     <span id="share-code">NET-ACAD-CLASS7-PENDING</span>
-                                    <button onclick="copyShareCode()" class="text-sky-600 hover:text-sky-500 transition-colors flex items-center gap-1.5 font-bold">
+                                    <button onclick="copyShareCode()" class="text-sky-600 hover:text-sky-500 transition-colors flex items-center gap-1.5 font-bold text-sm">
                                         <i data-lucide="copy" class="w-4 h-4"></i>
                                         <span>העתק</span>
                                     </button>
@@ -913,7 +977,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             </div>
 
                             <div class="mt-6 pt-4 border-t border-slate-200 space-y-3">
-                                <button onclick="exportTeacherReport()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-extrabold py-3 rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow">
+                                <button onclick="exportTeacherReport()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-extrabold py-3.5 rounded-lg text-base transition-all flex items-center justify-center gap-2 shadow">
                                     <i data-lucide="download" class="w-5 h-5"></i>
                                     <span>ייצא דוח מסכם למורה</span>
                                 </button>
@@ -1123,11 +1187,11 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
             if (choice === 2) {
                 feedback.className += ' bg-emerald-50 text-emerald-800 border border-emerald-200';
-                feedback.innerHTML = `🌟 <b>נכון מאוד!</b> שיטת Router on a Stick מאפשרת להשתמש בממשק פיזי בודד ולחתוך אותו לוגית לעשרות תתי-ממשקים (Subinterfaces) עצמאיים. זה חוסך אלפי שקלים בקניית כבלים פיזיים וציוד נתבים מיותר!`;
+                feedback.innerHTML = `🌟 <b>נכון מאוד!</b> שיטת Router on a Stick מאפשרת להשתמש בממשק פיזי בודד ולחתוך אותו לוגית לעשרות תתי-ממשקים עצמאיים. זה חוסך אלפי שקלים בקניית כבלים פיזיים וציוד נתבים מיותר!`;
                 addXP(25);
             } else {
                 feedback.className += ' bg-red-50 text-red-700 border border-red-200';
-                feedback.innerHTML = `❌ <b>בחירה פחות מקצועית.</b> מתיחת 50 כבלים פיזיים היא בזבוז משאבים משווע ותחייב אותנו לקנות נתב ענק ויקר באופן מיוחד. בתעשייה משתמשים אך ורק בניתוב לוגי (Trunk + Subinterfaces).`;
+                feedback.innerHTML = `❌ <b>בחירה פחות מקצועית.</b> מתיחת 50 כבלים פיזיים היא בזבוז משאבים משווע ותחייב אותנו לקנות נתב ענק ויקר באופן מיוחד. בתעשייה משתמשים אך ורק בניתוב לוגי.`;
                 addXP(5);
             }
         }
@@ -1195,9 +1259,9 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             if(sameVlan){
                 const frame = {srcMac:s.mac, dstMac:d.mac, srcIp:s.ip, dstIp:d.ip, tag:null};
                 return [
-                    {pos:{x:s.x,y:s.y}, frame, note:`${s.name} בונה מסגרת Ethernet: היעד באותו VLAN (${s.vlan}), אז נשלחת ישירות ל-MAC של ${d.name} — ללא צורך בראוטר.`},
-                    {pos:switchPos, frame, note:`המתג מקבל את המסגרת ביציאת Access של VLAN ${s.vlan}, מזהה את MAC היעד בטבלת ה-MAC שלו ומעביר הלאה — ללא תיוג VLAN (יציאת Access לא מתייגת).`},
-                    {pos:{x:d.x,y:d.y}, frame, note:`המסגרת מגיעה ל-${d.name}. תקשורת תוך-VLAN הושלמה מבלי לגעת בראוטר בכלל.`},
+                    {pos:{x:s.x,y:s.y}, frame, note:`${s.name} בונה מסגרת Ethernet: היעד באותו VLAN, אז היא נשלחת ישירות ל-MAC של ${d.name} ללא צורך בנתב.`},
+                    {pos:switchPos, frame, note:`המתג מקבל את המסגרת ביציאת Access ומעביר הלאה לפי טבלת ה-MAC שלו.`},
+                    {pos:{x:d.x,y:d.y}, frame, note:`המסגרת מגיעה ל-${d.name}. תקשורת תוך-VLAN הושלמה מבלי לגעת בנתב.`},
                 ];
             }
 
@@ -1208,11 +1272,11 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
             const frame2 = {...frame2tag, tag:null};
 
             return [
-                {pos:{x:s.x,y:s.y}, frame:frame1, note:`${s.name} רואה שהיעד ${d.name} בתת-רשת אחרת (VLAN ${d.vlan}). המסגרת נשלחת ל-MAC של שער ברירת המחדל (${gwSrc.mac}), אך כתובת ה-IP של היעד נשארת ${d.ip}.`},
-                {pos:switchPos, frame:frame1tag, note:`המתג מקבל את המסגרת ביציאת Access של VLAN ${s.vlan}, ומכיוון שהיא צריכה לצאת דרך יציאת ה-Trunk לראוטר — מוסיף תג 802.1Q עם המספר ${s.vlan}.`},
-                {pos:routerPos, frame:frame2tag, note:`הראוטר מקבל את המסגרת בתת-ממשק Gi0/0.${s.vlan}, מסיר את התג, ומנתב לפי כתובת ה-IP. הוא בונה מסגרת חדשה עם תג VLAN ${d.vlan} ו-MAC יעד של ${d.name} — זהו ניתוב בין-VLAN אמיתי.`},
-                {pos:switchPos, frame:frame2tag, note:`המסגרת המנותבת חוזרת דרך ה-Trunk אל המתג, עדיין מתויגת ב-VLAN ${d.vlan}.`},
-                {pos:{x:d.x,y:d.y}, frame:frame2, note:`המתג מסיר את התג לפני שהוא מעביר ליציאת ה-Access של ${d.name}. המסגרת מגיעה ליעד — כתובת ה-IP המקורית והסופית לא השתנתה לאורך כל המסע.`},
+                {pos:{x:s.x,y:s.y}, frame:frame1, note:`${s.name} מזהה שהיעד ברשת אחרת. המסגרת נשלחת ל-MAC של שער ברירת המחדל (${gwSrc.mac}).`},
+                {pos:switchPos, frame:frame1tag, note:`המתג מקבל את המסגרת ביציאת Access ומוסיף תג 802.1Q ביציאה לכבל ה-Trunk אל הנתב.`},
+                {pos:routerPos, frame:frame2tag, note:`הנתב מקבל את המסגרת בתת-הממשק Gi0/0.${s.vlan}, מסיר את התג, מנתב לפי כתובת ה-IP, ובונה מסגרת חדשה עם תג של VLAN ${d.vlan}.`},
+                {pos:switchPos, frame:frame2tag, note:`המסגרת המנותבת חוזרת דרך ה-Trunk אל המתג.`},
+                {pos:{x:d.x,y:d.y}, frame:frame2, note:`המתג מסיר את התג ביציאה אל ${d.name}. המסגרת מגיעה ליעד!`},
             ];
         }
 
@@ -1422,7 +1486,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
             const messagesArea = document.getElementById('chat-messages');
             messagesArea.innerHTML += `
-                <div class="bg-sky-600 text-white p-3.5 rounded-xl max-w-[85%] self-end text-sm shadow-sm font-semibold leading-relaxed">
+                <div class="bg-sky-600 text-white p-3.5 rounded-xl max-w-[85%] self-end text-base shadow-sm font-semibold leading-relaxed">
                     <span class="text-xs font-black text-sky-100 block mb-1">אתה // </span>
                     ${messageText}
                 </div>
@@ -1433,7 +1497,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
             const typingId = "typing-" + Date.now();
             messagesArea.innerHTML += `
-                <div id="${typingId}" class="text-slate-500 italic text-sm animate-pulse font-bold">
+                <div id="${typingId}" class="text-slate-500 italic text-base animate-pulse font-bold">
                     אסף בודק את הציוד ועונה...
                 </div>
             `;
@@ -1462,7 +1526,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                     הפינג בין ה-VLANים עובד מושלם! הבנתי את הלקח: <b>תתי-ממשקים לוגיים לעולם לא יעבדו אם הממשק הפיזי הראשי שמחזיק אותם כבוי פיזית!</b> תודה רבה לך!`;
                     isPassed = true;
                 } else if (hasNoShut) {
-                    botResponse = `הרצתי <code>no shutdown</code> בתוך תתי-הממשקים הלוגיים <code>G0/0.10</code> ו-<code>G0/0.20</code> בעצמם, אבל זה עדיין לא שינה כלום. האם יש ממשק אחר שצריך "להדליק"?`;
+                    botResponse = `הרצתי <code>no shutdown</code> בתוך תתי-הממשקים הלוגיים <code>G0/0.10</code> ו-<code>G0/0.20</code> בעצמם, אבל זה עדיין לא שינה כלום. האם יש ממשק אחר שצריך להדליק?`;
                 } else if (hasPhysical) {
                     botResponse = `בדקתי את הממשק הפיזי <code>GigabitEthernet 0/0</code> בראוטר. הכבל מחובר, אבל נראה שהלד שלו עדיין אדום. איזה פקודה חסרה שם?`;
                 } else if (hasTrunk) {
@@ -1472,8 +1536,8 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                 }
 
                 messagesArea.innerHTML += `
-                    <div class="bg-white p-3.5 rounded-xl border border-slate-200 max-w-[85%] self-start text-sm text-slate-800 shadow-sm font-semibold leading-relaxed">
-                        <span class="text-xs font-black text-red-600 block mb-1">ASAF_JUNIOR_ADMIN // </span>
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-200 max-w-[85%] self-start text-base text-slate-800 shadow-sm font-semibold leading-relaxed">
+                        <span class="text-xs font-black text-red-600 block mb-1 code-font">ASAF_JUNIOR_ADMIN // </span>
                         ${botResponse}
                     </div>
                 `;
