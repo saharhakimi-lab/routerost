@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;800;900&family=Heebo:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -31,9 +31,9 @@
             --vlan20: #B9862F;
             --radius: 18px;
             --shadow: 0 10px 30px -12px rgba(120, 40, 20, 0.18);
-            --font-body: 'Heebo', system-ui, sans-serif;
+            --font-body: 'Rubik', system-ui, sans-serif;
             --font-display: 'Rubik', system-ui, sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --font-code: 'Fira Code', ui-monospace, 'SFMono-Regular', Menlo, monospace;
         }
 
         body.dark {
@@ -71,14 +71,33 @@
             display: inline-block;
         }
         
+        .tabs-nav {
+            display: flex; flex-wrap: nowrap; align-items: center; gap: .35rem;
+            width: fit-content; max-width: 100%; margin-inline: auto;
+            padding: .3rem; overflow-x: auto; scrollbar-width: none;
+            background: var(--cream); border: 2px solid var(--line); border-radius: 18px;
+        }
+        .tabs-nav::-webkit-scrollbar { display: none; }
         .tab-btn {
-            transition: all 0.2s ease;
+            position: relative; display: flex; align-items: center; gap: .5rem;
+            padding: .5rem 1rem; border-radius: 13px; border: 2px solid transparent;
+            background: transparent; color: var(--muted);
+            font-family: var(--font-body); font-weight: 700; font-size: .88rem; line-height: 1.2;
+            white-space: nowrap; cursor: pointer;
+            transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease, border-color .18s ease;
         }
+        .tab-btn:hover { background: var(--paper); color: var(--ink); border-color: var(--line); transform: translateY(-1px); }
         .tab-btn.active {
-            background-color: var(--red);
-            color: #ffffff;
-            box-shadow: var(--shadow);
+            background: var(--ink); color: var(--paper); border-color: var(--ink);
+            box-shadow: 0 8px 18px -8px rgba(32, 21, 15, .6); transform: none;
         }
+        .tab-btn.active::after {
+            content: ""; position: absolute; inset-inline: 1rem; bottom: -2px;
+            height: 3px; border-radius: 3px 3px 0 0; background: #ef4444;
+        }
+        .tab-btn .eng-box { font-size: .8em; padding: 0 .4em; }
+        .tab-btn.active .eng-box { background: transparent; border-color: currentColor; color: inherit; }
+        .tab-btn:focus-visible { outline: 3px solid rgba(185, 28, 28, .35); outline-offset: 2px; }
 
         @keyframes crazy-spin {
             0% { transform: rotate(0deg); }
@@ -260,25 +279,39 @@
             display: flex; align-items: center; justify-content: center; font-family: var(--font-code);
         }
 
-        .terminal {
-            background: #181311;
-            border-radius: 14px;
-            padding: 16px;
-            font-family: var(--font-code);
-            font-size: 14px;
-            color: #f8efe7;
-            height: 260px;
-            overflow-y: auto;
-            direction: ltr;
-            text-align: left;
-            border: 2px solid var(--line);
+        /* ---------- terminal windows ---------- */
+        .term {
+            direction: ltr; text-align: left;
+            background: #1e1b18; border: 1px solid #3d2f26; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 18px 40px -20px rgba(32, 21, 15, .6); color: #e8dfd0;
         }
-        .terminal .prompt-line { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
-        .terminal .prompt-text { color: #4ade80; white-space: nowrap; }
+        .term-bar { display: flex; align-items: center; gap: .85rem; padding: .65rem 1rem; background: #2a2521; border-bottom: 1px solid #3d2f26; }
+        .term-dots { display: flex; gap: .4rem; flex-shrink: 0; }
+        .term-dots i { display: block; width: .7rem; height: .7rem; border-radius: 50%; }
+        .term-dots i:nth-child(1) { background: #ef6b5b; }
+        .term-dots i:nth-child(2) { background: #f2b84b; }
+        .term-dots i:nth-child(3) { background: #5bc98a; }
+        .term-body {
+            background: #12100e; padding: 1rem 1.25rem 1.1rem;
+            font-family: var(--font-code); font-size: .85rem; line-height: 1.9;
+            overflow-x: auto; color: #d9cfbf; direction: ltr; text-align: left;
+        }
+        .term-line { display: block; white-space: pre; }
+        .t-p { color: #7dd3fc; }
+        .t-k { color: #6ee7b7; font-weight: 500; }
+
+        .terminal {
+            background: #12100e; padding: 1rem 1.25rem;
+            font-family: var(--font-code); font-size: .88rem; line-height: 1.85; color: #d9cfbf;
+            height: 260px; overflow-y: auto; direction: ltr; text-align: left;
+        }
+        .terminal .ln { white-space: pre-wrap; color: #d9cfbf; }
+        .terminal .prompt-line { display: flex; gap: .5rem; align-items: center; margin-top: .2rem; }
+        .terminal .prompt-text { color: #7dd3fc; white-space: nowrap; }
         .terminal input {
             background: transparent; border: none; outline: none;
-            color: #f8efe7; font-family: var(--font-code); font-size: 14px;
-            flex: 1;
+            color: #6ee7b7; caret-color: #6ee7b7;
+            font-family: inherit; font-size: inherit; flex: 1;
         }
 
         .eng-box {
@@ -325,22 +358,24 @@
 
     <!-- NAVIGATION TABS -->
     <div class="bg-[var(--paper)] border-b-2 border-[var(--line)] px-4 py-2 sticky top-[73px] z-30">
-        <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <button id="btn-step-1" onclick="switchStep(1)" class="tab-btn active flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[var(--cream)] text-[var(--ink)] whitespace-nowrap">
+        <div class="max-w-7xl mx-auto">
+        <nav class="tabs-nav">
+            <button id="btn-step-1" onclick="switchStep(1)" class="tab-btn active">
                 <span>01. פרדוקס החומה והגשר</span>
             </button>
-            <button id="btn-step-2" onclick="switchStep(2)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[var(--cream)] text-[var(--ink)] whitespace-nowrap">
+            <button id="btn-step-2" onclick="switchStep(2)" class="tab-btn">
                 <span>02. סוד תתי הממשקים <span class="eng-box text-xs">RoaS</span></span>
             </button>
-            <button id="btn-step-3" onclick="switchStep(3)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[var(--cream)] text-[var(--ink)] whitespace-nowrap">
+            <button id="btn-step-3" onclick="switchStep(3)" class="tab-btn">
                 <span>03. סימולטור הגשר הלוגי</span>
             </button>
-            <button id="btn-step-4" onclick="switchStep(4)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[var(--cream)] text-[var(--ink)] whitespace-nowrap">
+            <button id="btn-step-4" onclick="switchStep(4)" class="tab-btn">
                 <span>04. אתגר איתור התקלות <span class="eng-box text-xs">AI</span></span>
             </button>
-            <button id="btn-step-5" onclick="switchStep(5)" class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[var(--cream)] text-[var(--ink)] whitespace-nowrap">
+            <button id="btn-step-5" onclick="switchStep(5)" class="tab-btn">
                 <span>05. דוח ביצועים וסיכום</span>
             </button>
+        </nav>
         </div>
     </div>
 
@@ -396,7 +431,7 @@
                                         <span class="eng-box text-xs">Router</span> 
                                         מבין כתובות 
                                         <span class="eng-box text-xs">IP</span> 
-                                        וניתוב[span_1](start_span)[span_1](end_span). הוא יכול לשמש כמשמר גבול המחבר בין שתי המדינות השונות. חבילה שרוצה לעבור תעלה לנתב, תעבור בדיקה ביטחונית ותוזרם ליעדה.
+                                        וניתוב. הוא יכול לשמש כמשמר גבול המחבר בין שתי המדינות השונות. חבילה שרוצה לעבור תעלה לנתב, תעבור בדיקה ביטחונית ותוזרם ליעדה.
                                     </p>
                                 </div>
                             </div>
@@ -458,9 +493,9 @@
                     
                     <p class="text-[var(--muted)] leading-relaxed text-base mb-6 font-semibold">
                         במקום לבזבז יציאות פיזיות יקרות על הנתב, אנחנו משתמשים בשיטת 
-                        <span class="eng-box text-sm">Router on a Stick</span>[span_2](start_span)[span_2](end_span). 
+                        <span class="eng-box text-sm">Router on a Stick</span>. 
                         אנחנו לוקחים כבל פיזי בודד, מחברים אותו ליציאה מהירה בנתב למשל 
-                        <span class="eng-box text-sm">GigabitEthernet 0/0</span>[span_3](start_span)[span_3](end_span), 
+                        <span class="eng-box text-sm">GigabitEthernet 0/0</span>, 
                         ומגדירים את הצד של המתג כערוץ 
                         <span class="eng-box text-sm">Trunk</span> 
                         שיודע להעביר את כל תגיות ה-VLAN על כבל אחד.
@@ -525,14 +560,18 @@
                     </div>
 
                     <div class="pt-4 border-t-2 border-[var(--line)]">
-                        <span class="text-xs text-[var(--muted)] block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות Cisco IOS CLI[span_4](start_span)[span_4](end_span):</span>
-                        <pre class="bg-[#181311] text-[#7fdcf0] p-4 rounded-xl font-mono text-xs space-y-1 text-left overflow-x-auto shadow-inner" dir="ltr">
-Router(config)# interface GigabitEthernet 0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-Router(config-subif)# interface GigabitEthernet 0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
+                        <span class="text-xs text-[var(--muted)] block mb-2 font-bold">הצצה לפקודות סיסקו האמיתיות Cisco IOS CLI:</span>
+                        <div class="term">
+                        <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div></div>
+                        <div class="term-body">
+                            <div class="term-line"><span class="t-p">Router(config)#</span> <span class="t-k">interface GigabitEthernet 0/0.10</span></div>
+                            <div class="term-line"><span class="t-p">Router(config-subif)#</span> <span class="t-k">encapsulation dot1Q 10</span></div>
+                            <div class="term-line"><span class="t-p">Router(config-subif)#</span> <span class="t-k">ip address 192.168.10.1 255.255.255.0</span></div>
+                            <div class="term-line"><span class="t-p">Router(config-subif)#</span> <span class="t-k">interface GigabitEthernet 0/0.20</span></div>
+                            <div class="term-line"><span class="t-p">Router(config-subif)#</span> <span class="t-k">encapsulation dot1Q 20</span></div>
+                            <div class="term-line"><span class="t-p">Router(config-subif)#</span> <span class="t-k">ip address 192.168.20.1 255.255.255.0</span></div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 
@@ -683,14 +722,17 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
 
                     <!-- CLI -->
                     <div class="sim-card mt-6">
-                        <h2 class="text-lg font-bold mb-3">תרגול שורת פקודות Cisco IOS — R1[span_5](start_span)[span_5](end_span)</h2>
-                        <div class="terminal" id="terminal">
+                        <h2 class="text-lg font-bold mb-3">תרגול שורת פקודות Cisco IOS — R1</h2>
+                        <div class="term">
+                            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div></div>
+                            <div class="terminal" id="terminal">
                             <div class="ln">R1 con0 is now available</div>
                             <div class="ln">Press RETURN to get started.</div>
                             <div class="prompt-line">
                                 <span class="prompt-text" id="promptText">Router&gt;</span>
                                 <input type="text" id="cliInput" autocomplete="off" spellcheck="false">
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -709,7 +751,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>
                             <span class="bg-[var(--cream)] border border-[var(--line)] text-xs px-3 py-1 rounded-full font-extrabold uppercase">אתגר פתרון תקלות AI</span>
                             <h2 class="text-2xl font-black text-[var(--ink)] mt-2">לחקור את אסף: למה הפינג לא עובד?</h2>
                             <p class="text-[var(--muted)] text-sm font-semibold mt-1">
-                                אסף, טכנאי זוטר במחלקה שלך, הגדיר תשתית <span class="eng-box text-xs">Router on a Stick</span>[span_6](start_span)[span_6](end_span) בקמפוס אבל התקשורת מתה. חקור אותו בשאלות בצ'אט כדי למצוא את המחדל!
+                                אסף, טכנאי זוטר במחלקה שלך, הגדיר תשתית <span class="eng-box text-xs">Router on a Stick</span> בקמפוס אבל התקשורת מתה. חקור אותו בשאלות בצ'אט כדי למצוא את המחדל!
                             </p>
                         </div>
                     </div>
